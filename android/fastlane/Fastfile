@@ -1,0 +1,61 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :internal do
+    previous_build_number = google_play_track_version_codes(
+      track: "internal",
+      json_key_data: ENV['PLAY_STORE_CONFIG_JSON'],
+    )[0]
+
+    current_build_number = previous_build_number + 1
+
+    tag = last_git_tag(pattern: "v[0-9].*")
+
+    flutter = ENV['FLUTTER']
+
+    version_name = tag[1..-1];
+    version_code = current_build_number
+
+    # The app is built here in opposed to iOS that is built by GitHub Actions
+    # because we want to set the version code and version name on the appbundle
+    sh(flutter, "build", "appbundle",  "--build-number", version_code.to_s, "--build-name", version_name, "--target", "lib/main.dart")
+
+    # If this stage fails check if there is an existing version with the same version code
+    # If so, delete it from the Google Play Console or manually increment the version code to a latter value
+    upload_to_play_store(
+        version_name: version_name,
+        version_code: version_code,
+        # Change here to your package name
+        package_name: "[org.myorg.myapp]",
+        skip_upload_apk: true,
+        skip_upload_images: true,
+        skip_upload_screenshots: true,
+        skip_upload_changelogs: true,
+        track: "internal",
+        aab: "../build/app/outputs/bundle/release/app-release.aab",
+        json_key_data: ENV['PLAY_STORE_CONFIG_JSON'],
+        release_status: "completed",
+    )
+  end
+end

@@ -1,0 +1,51 @@
+name: build-ios-app
+on:
+#  workflow_run:
+#    workflows: ["Conventional Release"]
+#    branches: [main]
+#    types:
+#      - completed
+#    paths:
+#      - ios/**
+#      - lib/**
+#      - '*'
+#      - .github/workflows/build-ios-app.yml
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: "Fastlane lane"
+        required: true
+        default: "beta"
+        type: choice
+        options:
+          - beta
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
+        # Change the following key to match your secret repository choice
+      - run: 'echo "$GC_KEY" > gc_keys.json'
+        working-directory: ios
+        shell: bash
+        env:
+          GC_KEY: ${{secrets.GC_KEY }}
+      - run: 'echo "$API_KEY" > AuthKey.p8'
+        working-directory: ios
+        shell: bash
+        env:
+          API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
+      - run: bundle install
+        working-directory: ios
+      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
+        working-directory: ios
+
