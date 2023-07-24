@@ -1,7 +1,7 @@
 name: build-ios-app
 on:
 #  workflow_run:
-#    workflows: ["Conventional Release"]
+#    workflows: ["Generate Changelog"]
 #    branches: [main]
 #    types:
 #      - completed
