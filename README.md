@@ -126,6 +126,28 @@ bundle exec fastlane ios beta
 
 The following steps will help you run the `build-android-app.yml` pipeline.
 
+You will need to replace the following classes in your build.gradle file:
+
+``` groovy
+android {
+    ...
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+    ...
+}
+    
+
 #### Fastlane
 
 Make sure to update the `Appfile` file in the `android/fastlane` directory.
@@ -170,3 +192,7 @@ Then run the following command in the `android` directory:
 ``` bash
 bundle exec fastlane android internal
 ```
+
+## Resources
+
+- [Guide](https://keyholesoftware.com/2023/02/13/automating-flutter-deployments-part-2-screenshots/) on how to set up screenshots for the App Store and Play Store
