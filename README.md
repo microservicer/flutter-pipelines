@@ -55,6 +55,14 @@ flutter pub global run rename --appname "My New App Name"
 
 Make sure that all the files in the `android/app/src/main/kotlin/com/example/` directory are moved to the new package name directory and this is added to git.
 
+### Git Hooks
+
+We use Git hooks to enforce commit message formatting and automatically update our release notes. To install these hooks, run the following command after you clone the repository:
+
+```bash
+./install_hooks.sh
+```
+
 ### Bundler
 
 Make sure you have Ruby installed on your machine.
