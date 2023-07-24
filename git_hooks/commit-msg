@@ -1,22 +1,61 @@
 #!/bin/bash
 
-commit_regex='^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.+\))?!?: .+'
-error_msg="ERROR: Commit message does not follow the Conventional Commits format."
+# Regular expression to validate commit message against Conventional Commit specification
+regex="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.+\))?: .+"
 
-# Prevent empty commit messages.
-if [ -z "$(cat "$1" | awk '{$1=$1};1')" ]; then
-  echo "ERROR: Empty commit message, please provide a commit message." >&2
-  exit 1
+# Get the commit message
+message=$(cat "$1")
+subject=$(echo "$message" | head -n1)
+body=$(echo "$message" | tail -n +2)
+
+# Rule 1: No periods at the end of subject line
+if [[ $subject =~ \.$ ]]; then
+    echo "ERROR: Commit message subject ends with a period"
+    exit 1
 fi
 
-# Check commit message format.
-if ! grep -iqE "$commit_regex" "$1"; then
-  echo "$error_msg" >&2
-  exit 1
+# Rule 2: Type Case
+if [[ ! $subject =~ ^[a-z]+(\(.+\))?:\ .+ ]]; then
+    echo "ERROR: Commit type should be in lowercase"
+    exit 1
 fi
 
-# Check if the commit message is too long.
-if [ "$(cat "$1" | wc -l)" -ne 1 ] || [ "$(cat "$1" | wc -c)" -gt 51 ]; then
-  echo "ERROR: Commit message is too long (should be <= 50 chars in a single line)." >&2
-  exit 1
+# Rule 3: Scope Case
+if [[ $subject =~ ^[a-z]+\(.+\)?:\ .+ ]]; then
+    if [[ ! $subject =~ ^[a-z]+\([a-z]+\):\ .+ ]]; then
+        echo "ERROR: Commit scope should be in lowercase"
+        exit 1
+    fi
+fi
+
+# Rule 4: Subject Case
+if [[ ! $subject =~ ^[a-z]+(\(.+\))?:\ [A-Z].* ]]; then
+    echo "ERROR: Commit message should start with an uppercase letter"
+    exit 1
+fi
+
+# Rule 5: Length Limitations
+subject_length=${#subject}
+body_length=$(echo "$body" | wc -m)
+if (( subject_length > 50 )) || (( body_length > 72 )); then
+    echo "ERROR: Commit message subject should not exceed 50 characters and body should not exceed 72 characters per line"
+    exit 1
+fi
+
+# Rule 6: Separate subject from body with a blank line
+if [[ -n $body ]] && [[ $message =~ ^.*\n\n.*$ ]]; then
+    echo "ERROR: Commit message body should be separated from the subject with a blank line"
+    exit 1
+fi
+
+# Rule 7: No Blank Commits
+if [[ -z $message ]]; then
+    echo "ERROR: Empty commit message, please provide a commit message."
+    exit 1
+fi
+
+# Check if the message matches the regex
+if [[ ! $message =~ $regex ]]; then
+    echo "ERROR: Commit message does not follow Conventional Commit specification"
+    exit 1
 fi
