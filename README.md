@@ -86,6 +86,9 @@ these are billed with 10x the price of a normal build.
 
 The following steps will help you run the `build-ios-app.yml` pipeline.
 
+Create a new App Store app in the [App Store Connect website](https://appstoreconnect.apple.com/).
+
+
 #### API Keys
 
 Generate a new App Store API key for the iOS app and store it in the GitHub repository secrets.

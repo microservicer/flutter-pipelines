@@ -18,7 +18,7 @@ default_platform(:ios)
 platform :ios do
   lane :beta do
     app_store_connect_api_key(
-        key_id: '597C74N96Q',
+        key_id: '4H27D3QLG2',
         issuer_id: 'ec2c19af-8deb-4579-be01-5d677995d709',
         key_filepath: './AuthKey.p8'
     )
