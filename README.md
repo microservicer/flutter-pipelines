@@ -45,10 +45,15 @@ flutter pub get
 
 To rename the package name of your Flutter app, run the following command in the root of your Flutter project:
 Change the `com.example.new_package_name` to the package name you want to use.
+Change the `My New App Name` to the name you want to use for your app.
 
 ``` bash
-flutter pub run change_app_package_name:main com.example.new_package_name
+flutter pub global activate rename
+flutter pub global run rename --bundleId com.example.new_package_name
+flutter pub global run rename --appname "My New App Name"
 ```
+
+Make sure that all the files in the `android/app/src/main/kotlin/com/example/` directory are moved to the new package name directory and this is added to git.
 
 ### Bundler
 
