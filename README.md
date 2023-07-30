@@ -33,6 +33,23 @@ The following pipelines are defined in this repository:
 
 To get started copy the content of this project to your Flutter project.
 
+### Flutter 
+
+Get the latest dependencies by running the following command in the root of your Flutter project:
+
+``` bash
+flutter pub get
+```
+
+### Renaming the package name
+
+To rename the package name of your Flutter app, run the following command in the root of your Flutter project:
+Change the `com.example.new_package_name` to the package name you want to use.
+
+``` bash
+flutter pub run change_app_package_name:main com.example.new_package_name
+```
+
 ### Bundler
 
 Make sure you have Ruby installed on your machine.
