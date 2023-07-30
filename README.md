@@ -57,7 +57,8 @@ Make sure that all the files in the `android/app/src/main/kotlin/com/example/` d
 
 ### Git Hooks
 
-We use Git hooks to enforce commit message formatting and automatically update our release notes. To install these hooks, run the following command after you clone the repository:
+We use Git hooks to enforce commit message formatting and automatically update our release notes.
+To install these hooks, run the following command after you clone the repository:
 
 ```bash
 ./install_hooks.sh
@@ -163,13 +164,32 @@ bundle exec fastlane ios beta
 
 ## Android
 
-### Setup Android
+Create a new app in the [Google Play Console](https://play.google.com/apps/publish/).
 
-The following steps will help you run the `build-android-app.yml` pipeline.
+Go to Testing > Internal Testing and "Choose signing key" and select "Use Google-generated key".
+
+### API Keys
+
+Create an API key for the Google Play Store.
+
+- At the [Google Play Console](https://play.google.com/apps/publish/) go to `Setup` and `API access` and create a new API key.
+- Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
+- name: `PLAY_STORE_CONFIG_JSON`
+
+### Setup Android Manually
+
+The following steps will help you run the `build-android-app.yml` pipeline if you only copied the files from this repository.
 
 You will need to replace the following classes in your build.gradle file:
 
 ``` groovy
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     ...
     signingConfigs {
@@ -190,23 +210,15 @@ android {
 ```
     
 
-#### Fastlane
+### Fastlane
 
 Make sure to update the `Appfile` file in the `android/fastlane` directory.
 
-#### Metadata
+### Metadata
 
 Make sure to update the `metadata/android/` directory with the correct metadata for the app.
 
-#### API Keys
-
-Create an API key for the Google Play Store.
-
-- At the [Google Play Console](https://play.google.com/apps/publish/) go to `Setup` and `API access` and create a new API key.
-- Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
-- name: `PLAY_STORE_CONFIG_JSON`
-
-#### Upload key
+### Upload key
 
 Generate a new upload key for the Android app and store it in the GitHub repository secrets.
 
@@ -223,11 +235,14 @@ Generate a new upload key for the Android app and store it in the GitHub reposit
   - `KEYSTORE_KEY_PASSWORD`
   - `KEYSTORE_STORE_PASSWORD`
 
-Remember to add `key.properties` and the generated key to the `.gitignore` file.
+Make sure to add `key.properties` and the generated key to the `.gitignore` file.
 
 ### Running Android build locally
 
-Make sure you have the API Key and Upload key in your `android` directory.
+Make sure you have the following:
+- `key.properties` in your `android` directory. 
+- your upload key in the `android/app` directory.
+- the API key stored in the `PLAY_STORE_CONFIG_JSON` env.
 
 Then run the following command in the `android` directory:
 
