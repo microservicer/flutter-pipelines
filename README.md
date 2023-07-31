@@ -263,6 +263,7 @@ Make sure you have the following:
 - `key.properties` in your `android` directory. 
 - your upload key in the `android/app` directory.
 - the API key stored in the `PLAY_STORE_CONFIG_JSON` env or in a file called `key.json` in the `android` directory.
+- Export your flutter project path ```bash export FLUTTER=$FLUTTER_PATH``` where `$FLUTTER_PATH` is the path to your flutter installation.
 
 Then run the following command in the `android` directory:
 

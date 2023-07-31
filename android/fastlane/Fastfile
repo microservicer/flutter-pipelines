@@ -35,7 +35,7 @@ platform :android do
 
     flutter = ENV['FLUTTER']
 
-    version_name = tag[1..-1];
+    version_name = tag[1..-1]
     version_code = current_build_number
 
     # The app is built here in opposed to iOS that is built by GitHub Actions
@@ -47,8 +47,6 @@ platform :android do
     upload_to_play_store(
         version_name: version_name,
         version_code: version_code,
-        # Change here to your package name
-        package_name: "[org.myorg.myapp]",
         skip_upload_apk: true,
         skip_upload_images: true,
         skip_upload_screenshots: true,
@@ -56,7 +54,7 @@ platform :android do
         track: "internal",
         aab: "../build/app/outputs/bundle/release/app-release.aab",
         json_key_data: json_key,
-        release_status: "completed",
+        release_status: "draft",
     )
   end
 end
