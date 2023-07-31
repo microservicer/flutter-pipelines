@@ -35,6 +35,8 @@ dev_dependencies:
   change_app_package_name: ^1.1.0
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -16,12 +16,7 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
-
-  desc "Deploy a new version to the Google Play"
+  desc "Deploy a new version to the Google Play internal track"
   lane :internal do
     json_key = ENV['PLAY_STORE_CONFIG_JSON'] ? ENV['PLAY_STORE_CONFIG_JSON'] : File.read("../key.json")
     previous_build_number = google_play_track_version_codes(
@@ -54,6 +49,7 @@ platform :android do
         track: "internal",
         aab: "../build/app/outputs/bundle/release/app-release.aab",
         json_key_data: json_key,
+        # Change to "completed" once your app is ready to publish
         release_status: "draft",
     )
   end

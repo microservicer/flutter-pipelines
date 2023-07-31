@@ -274,3 +274,6 @@ bundle exec fastlane android internal
 ## Resources
 
 - [Guide](https://keyholesoftware.com/2023/02/13/automating-flutter-deployments-part-2-screenshots/) on how to set up screenshots for the App Store and Play Store
+- [Flutter Integration Test](https://flutter.dev/docs/cookbook/testing/integration/introduction)
+- [Flutter Integration Test Repo](https://github.com/flutter/flutter/blob/master/packages/integration_test/README.md)
+- [emulator](https://pub.dev/packages/emulators)
