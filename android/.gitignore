@@ -13,3 +13,4 @@ key.properties
 **/*.jks
 
 fastlane/report.xml
+key.json

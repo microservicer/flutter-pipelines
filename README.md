@@ -166,8 +166,6 @@ bundle exec fastlane ios beta
 
 Create a new app in the [Google Play Console](https://play.google.com/apps/publish/).
 
-Go to Testing > Internal Testing and "Choose signing key" and select "Use Google-generated key".
-
 ### API Keys
 
 Create an API key for the Google Play Store.
@@ -208,7 +206,6 @@ android {
     ...
 }
 ```
-    
 
 ### Fastlane
 
@@ -237,12 +234,35 @@ Generate a new upload key for the Android app and store it in the GitHub reposit
 
 Make sure to add `key.properties` and the generated key to the `.gitignore` file.
 
-### Running Android build locally
+### Build Android locally
+
+To be able to use the pipeline you have to build and upload the app bundle to the Play Store manually the first time.
+
+This is because the pipeline is dependent on the app bundle name that can only be set when uploading the app bundle to the Play Store.
+
+Make sure you have the following:
+- `key.properties` in your `android` directory.
+- your upload key in the `android/app` directory.
+
+To build the Android app locally, run the following command in the root of your Flutter project:
+
+``` bash
+flutter build appbundle --release
+```
+
+[Google Play Console](https://play.google.com/apps/publish/). > Your app > Testing > Internal Testing and "Choose signing key"
+and select "Use Google-generated key".
+
+Then upload the app bundle to the Play Store.
+- Create release > Upload your app bundle. 
+- You can find the app bundle in the `build/app/outputs/bundle/release/app-release.aab` directory.
+
+### Running Android pipeline build locally
 
 Make sure you have the following:
 - `key.properties` in your `android` directory. 
 - your upload key in the `android/app` directory.
-- the API key stored in the `PLAY_STORE_CONFIG_JSON` env.
+- the API key stored in the `PLAY_STORE_CONFIG_JSON` env or in a file called `key.json` in the `android` directory.
 
 Then run the following command in the `android` directory:
 
