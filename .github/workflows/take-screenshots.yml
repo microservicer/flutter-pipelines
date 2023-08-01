@@ -36,7 +36,7 @@ jobs:
       - run: flutter build ipa --no-codesign --target=test_driver/integration_test.dart
       # Archive the ipa
       - name: Archive ipa
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ipa
           path: build/ios/ipa/Runner.ipa
@@ -53,7 +53,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download ipa
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: ipa
           path: build/ios/ipa/Runner.ipa
