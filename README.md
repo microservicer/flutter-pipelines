@@ -277,3 +277,6 @@ bundle exec fastlane android internal
 - [Flutter Integration Test](https://flutter.dev/docs/cookbook/testing/integration/introduction)
 - [Flutter Integration Test Repo](https://github.com/flutter/flutter/blob/master/packages/integration_test/README.md)
 - [emulator](https://pub.dev/packages/emulators)
+- [iOS screenshot sizes](https://appradar.com/blog/ios-app-screenshot-sizes-and-guidelines-for-the-apple-app-store)
+- [iOS emulator Action](https://github.com/marketplace/actions/launch-ios-simulator)
+- [Android emulator Action](https://github.com/marketplace/actions/android-emulator-runner)
