@@ -1,15 +1,15 @@
 name: build-ios-app
 on:
-  workflow_run:
-    workflows: ["Generate Changelog"]
-    branches: [main]
-    types:
-      - completed
-    paths:
-      - ios/**
-      - lib/**
-      - '*'
-      - .github/workflows/build-ios-app.yml
+#  workflow_run:
+#    workflows: ["Generate Changelog"]
+#    branches: [main]
+#    types:
+#      - completed
+#    paths:
+#      - ios/**
+#      - lib/**
+#      - '*'
+#      - .github/workflows/build-ios-app.yml
   workflow_dispatch:
     inputs:
       lane:
@@ -22,9 +22,9 @@ on:
 jobs:
   build:
     runs-on: macOS-latest
-    strategy:
-      matrix:
-        model: ['Phone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
+    defaults:
+      run:
+        working-directory: ios
     steps:
       - uses: actions/checkout@v3
         with:
@@ -35,24 +35,16 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - uses: futureware-tech/simulator-action@v2
-        with:
-          model: 'iPhone 8'
-      - run: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/screenshot_test.dart
-#      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
-        # Change the following key to match your secret repository choice
-#      - run: 'echo "$GC_KEY" > gc_keys.json'
-#        working-directory: ios
-#        shell: bash
-#        env:
-#          GC_KEY: ${{secrets.GC_KEY }}
-#      - run: 'echo "$API_KEY" > AuthKey.p8'
-#        working-directory: ios
-#        shell: bash
-#        env:
-#          API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
-#      - run: bundle install
-#        working-directory: ios
-#      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
-#        working-directory: ios
+      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
+      # Change the following key to match your secret repository choice
+      - run: 'echo "$GC_KEY" > gc_keys.json'
+        shell: bash
+        env:
+          GC_KEY: ${{secrets.GC_KEY }}
+      - run: 'echo "$API_KEY" > AuthKey.p8'
+        shell: bash
+        env:
+          API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
+      - run: bundle install
+      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
 

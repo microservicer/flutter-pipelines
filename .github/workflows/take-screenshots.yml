@@ -1,0 +1,71 @@
+name: build-ios-app
+on:
+  workflow_run:
+    workflows: ["Generate Changelog"]
+    branches: [main]
+    types:
+      - completed
+    paths:
+      - ios/**
+      - lib/**
+      - '*'
+      - .github/workflows/build-ios-app.yml
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: "Fastlane lane"
+        required: true
+        default: "beta"
+        type: choice
+        options:
+          - beta
+jobs:
+  build:
+    runs-on: macos-latest-xl
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+      - run: flutter build ipa --no-codesign --target=test_driver/integration_test.dart
+      # Archive the ipa
+      - name: Archive ipa
+        uses: actions/upload-artifact@v2
+        with:
+          name: ipa
+          path: build/ios/ipa/Runner.ipa
+  take-screenshot:
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        model: ['Phone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Download ipa
+        uses: actions/download-artifact@v2
+        with:
+          name: ipa
+          path: build/ios/ipa/Runner.ipa
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+      - uses: futureware-tech/simulator-action@v2
+        with:
+          model: ${{ matrix.model }}
+      - run: |
+          flutter drive
+          --driver=test_driver/integration_test.dart
+          --target=integration_test/screenshot_test.dart
+          --use-application-binary=build/ios/ipa/Runner.ipa
+          --dart-define=DEVICE_MODEL=${{ matrix.model }}
+
