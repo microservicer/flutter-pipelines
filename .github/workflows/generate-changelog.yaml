@@ -1,9 +1,11 @@
 name: Generate Changelog
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_run:
+    workflows: ["Conventional Release"]
+    branches: [main]
+    types:
+      - completed
 
 jobs:
   release:
