@@ -23,12 +23,12 @@ jobs:
         run: npm install -g conventional-changelog-cli
 
       - name: Generate Changelog
-        run: conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+        run: conventional-changelog -p angular -i CHANGELOG.md -s
 
       - name: Commit Changelog
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add CHANGELOG.md
-          git commit -m "chore: update CHANGELOG.md" -m "[skip ci]"
+          git diff-index --quiet HEAD || git commit -m "chore: update CHANGELOG.md" -m "[skip ci]"
           git push
