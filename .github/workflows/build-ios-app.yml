@@ -22,6 +22,7 @@ on:
 jobs:
   build:
     runs-on: macOS-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: ios
