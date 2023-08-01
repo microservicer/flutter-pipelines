@@ -30,5 +30,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add CHANGELOG.md
-          git diff-index --quiet HEAD || git commit -m "chore: update CHANGELOG.md" -m "[skip ci]"
-          git push
+          git diff-index --quiet HEAD || git commit -m "chore: update CHANGELOG.md" -m "[skip ci]" && git push

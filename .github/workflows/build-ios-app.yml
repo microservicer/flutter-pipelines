@@ -1,15 +1,15 @@
 name: build-ios-app
 on:
-#  workflow_run:
-#    workflows: ["Generate Changelog"]
-#    branches: [main]
-#    types:
-#      - completed
-#    paths:
-#      - ios/**
-#      - lib/**
-#      - '*'
-#      - .github/workflows/build-ios-app.yml
+  workflow_run:
+    workflows: ["Generate Changelog"]
+    branches: [main]
+    types:
+      - completed
+    paths:
+      - ios/**
+      - lib/**
+      - '*'
+      - .github/workflows/build-ios-app.yml
   workflow_dispatch:
     inputs:
       lane:
@@ -21,7 +21,7 @@ on:
           - beta
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: macOS-latest-xl
     timeout-minutes: 20
     defaults:
       run:
@@ -48,4 +48,9 @@ jobs:
           API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
       - run: bundle install
       - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
+      - name: Archive ipa
+        uses: actions/upload-artifact@v3
+        with:
+          name: ipa-{{ GITHUB_SHA }}
+          path: Runner.ipa
 

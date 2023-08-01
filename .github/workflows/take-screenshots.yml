@@ -1,7 +1,7 @@
 name: take-screenshots
 on:
   workflow_run:
-    workflows: ["Generate Changelog"]
+    workflows: ["build-ios-app"]
     branches: [main]
     types:
       - completed
@@ -20,26 +20,6 @@ on:
         options:
           - beta
 jobs:
-  build:
-    runs-on: macos-latest-xl
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build ipa --no-codesign --target=test_driver/integration_test.dart
-      # Archive the ipa
-      - name: Archive ipa
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipa
-          path: build/ios/ipa/Runner.ipa
   take-screenshot:
     runs-on: macOS-latest
     needs:
@@ -55,7 +35,7 @@ jobs:
       - name: Download ipa
         uses: actions/download-artifact@v3
         with:
-          name: ipa
+          name: ipa-{{ GITHUB_SHA }}
           path: build/ios/ipa/Runner.ipa
       - name: Flutter
         uses: subosito/flutter-action@v2
