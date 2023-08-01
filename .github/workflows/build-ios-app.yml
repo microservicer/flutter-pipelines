@@ -22,6 +22,9 @@ on:
 jobs:
   build:
     runs-on: macOS-latest
+    strategy:
+      matrix:
+        model: ['Phone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
     steps:
       - uses: actions/checkout@v3
         with:
