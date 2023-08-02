@@ -22,7 +22,6 @@ platform :ios do
         issuer_id: 'ec2c19af-8deb-4579-be01-5d677995d709',
         key_filepath: './AuthKey.p8'
     )
-    changelog = changelog_from_git_commits()
     setup_ci if ENV['CI']
     tag = last_git_tag(pattern: 'v[0-9].*')
     increment_version_number(

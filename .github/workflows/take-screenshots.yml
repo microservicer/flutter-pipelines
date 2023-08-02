@@ -22,8 +22,6 @@ on:
 jobs:
   take-screenshot:
     runs-on: macOS-latest
-    needs:
-      - build
     timeout-minutes: 10
     strategy:
       matrix:
