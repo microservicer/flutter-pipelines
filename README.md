@@ -116,7 +116,7 @@ To initialize the match repo, run the following command in the `ios` directory:
 bundle exec fastlane match init
 ```
 
-Following the steps make sure to store the secret(s) in the GitHub repository secrets.
+After following the steps make sure to store the secret(s) in the GitHub repository secrets.
 To be accessed by the `build-ios-app.yml` pipeline.
 
 When you have all the details for your Match setup update the `Matchfile` file in the `ios/fastlane` directory.
