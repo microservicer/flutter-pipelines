@@ -38,10 +38,10 @@ jobs:
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
       - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
       # Change the following key to match your secret repository choice
-      - run: 'echo "$GC_KEY" > gc_keys.json'
+      - run: 'echo "$GC_KEYS" > gc_keys.json'
         shell: bash
         env:
-          GC_KEY: ${{secrets.GC_KEY }}
+          GC_KEYS: ${{secrets.GC_KEYS }}
       - run: 'echo "$API_KEY" > AuthKey.p8'
         shell: bash
         env:
