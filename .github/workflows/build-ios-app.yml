@@ -82,7 +82,6 @@ jobs:
           model: ${{ matrix.model }}
       - run: |
           flutter drive
-          --driver=test_driver/integration_test.dart
           --target=integration_test/screenshot_test.dart
           --use-application-binary=build/ios/ipa/Runner.ipa
           --dart-define=DEVICE_MODEL=${{ matrix.model }}
