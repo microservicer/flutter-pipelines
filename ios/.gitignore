@@ -35,3 +35,4 @@ Runner/GeneratedPluginRegistrant.*
 
 fastlane/report.xml
 *.p8
+gc_keys.json
