@@ -125,6 +125,8 @@ Then run the following command to create the certificates and profiles:
 bundle exec fastlane certs
 ```
 
+Make sure that you have itc_team_id and team_id in the `Appfile` file in the `ios/fastlane` directory.
+
 Then open Xcode and go to `target` > `Signing & Capabilities` and make sure that the Match certificates and profiles are selected.
 
 #### PodFile

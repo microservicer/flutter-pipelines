@@ -52,5 +52,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ipa-{{ GITHUB_SHA }}
-          path: Runner.ipa
+          path: ios/Runner.ipa
+          if-no-files-found: error
 
