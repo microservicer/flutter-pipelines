@@ -125,6 +125,8 @@ Then run the following command to create the certificates and profiles:
 bundle exec fastlane certs
 ```
 
+Then open Xcode and go to `target` > `Signing & Capabilities` and make sure that the Match certificates and profiles are selected.
+
 #### PodFile
 
 Add the line under the comment to your Podfile to reduce building time. Make sure to update the version tag from time to time.
