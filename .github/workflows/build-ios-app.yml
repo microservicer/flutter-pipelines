@@ -36,25 +36,30 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build ios --debug --config-only --no-codesign --target=test_driver/screenshot_test.dart
-      # Change the following key to match your secret repository choice
-      - run: 'echo "$GC_KEYS" > gc_keys.json'
-        shell: bash
-        env:
-          GC_KEYS: ${{secrets.GC_KEYS }}
-      - run: 'echo "$API_KEY" > AuthKey.p8'
-        shell: bash
-        env:
-          API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
-      - run: bundle install
-      - run: bundle exec fastlane versioning
-      - run: bundle exec fastlane integration
+      - run: flutter build ios --simulator --target=test_driver/screenshot_test.dart
       - name: Archive integration ipa
         uses: actions/upload-artifact@v3
         with:
-          name: ipa-integration
-          path: ios/Runner-development.ipa
-          if-no-files-found: error
+           name: app-simulator-build
+           path: build/ios/iphonesimulator/Runner.app
+           if-no-files-found: error
+      # Change the following key to match your secret repository choice
+#      - run: 'echo "$GC_KEYS" > gc_keys.json'
+#        shell: bash
+#        env:
+#          GC_KEYS: ${{secrets.GC_KEYS }}
+#      - run: 'echo "$API_KEY" > AuthKey.p8'
+#        shell: bash
+#        env:
+#          API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
+#      - run: bundle install
+#      - run: bundle exec fastlane versioning
+#      - name: Archive integration ipa
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: ipa-integration
+#          path: ios/Runner-development.ipa
+#          if-no-files-found: error
 #      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
 #      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
 #      - name: Archive ipa
@@ -78,8 +83,8 @@ jobs:
       - name: Download ipa
         uses: actions/download-artifact@v3
         with:
-          name: ipa-integration
-          path: build/ios/ipa/Runner.ipa
+          name: app-simulator-build
+          path: build/ios/iphonesimulator/Runner.app
       - name: Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -92,6 +97,10 @@ jobs:
       - run: >-
           flutter drive
           --driver=test_driver/screenshot_test.dart
-          --target=integration_test/screenshot_test.dart
           --use-application-binary=build/ios/ipa/Runner.ipa
-          --dart-define=DEVICE_MODEL="${{ matrix.model }}"
+      - name: Archive screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshot-${{ matrix.model }}
+          path: screenshots
+          if-no-files-found: error
