@@ -36,7 +36,7 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build ios --development --config-only --no-codesign --target=test_driver/screenshot_test.dart
+      - run: flutter build ios --debug --config-only --no-codesign --target=test_driver/screenshot_test.dart
       # Change the following key to match your secret repository choice
       - run: 'echo "$GC_KEYS" > gc_keys.json'
         shell: bash
