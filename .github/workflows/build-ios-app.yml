@@ -36,7 +36,7 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build ios --simulator --target=test_driver/screenshot_test.dart
+      - run: flutter build ios --simulator --target=integration_test/screenshot_test.dart
       - name: Archive integration ipa
         uses: actions/upload-artifact@v3
         with:
@@ -98,8 +98,8 @@ jobs:
       - run: >-
           flutter drive
           --driver=test_driver/screenshot_test.dart
-          --target=integration_test/screenshot_test.dart
- #         --use-application-binary=build/ios/iphonesimulator/Runner.app
+  #        --target=integration_test/screenshot_test.dart
+          --use-application-binary=build/ios/iphonesimulator/Runner.app
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
         with:
