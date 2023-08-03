@@ -36,24 +36,32 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
-      # Change the following key to match your secret repository choice
-      - run: 'echo "$GC_KEYS" > gc_keys.json'
-        shell: bash
-        env:
-          GC_KEYS: ${{secrets.GC_KEYS }}
-      - run: 'echo "$API_KEY" > AuthKey.p8'
-        shell: bash
-        env:
-          API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
-      - run: bundle install
-      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
+      - run: flutter build ipa --debug --target=integration_test/screenshot_test.dart --export-method=development
       - name: Archive ipa
         uses: actions/upload-artifact@v3
         with:
           name: ipa
           path: ios/Runner.ipa
           if-no-files-found: error
+
+#      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
+#      # Change the following key to match your secret repository choice
+#      - run: 'echo "$GC_KEYS" > gc_keys.json'
+#        shell: bash
+#        env:
+#          GC_KEYS: ${{secrets.GC_KEYS }}
+#      - run: 'echo "$API_KEY" > AuthKey.p8'
+#        shell: bash
+#        env:
+#          API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
+#      - run: bundle install
+#      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
+#      - name: Archive ipa
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: ipa
+#          path: ios/Runner.ipa
+#          if-no-files-found: error
   take-screenshot:
     runs-on: macOS-latest
     needs:
