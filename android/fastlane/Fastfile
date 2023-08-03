@@ -33,8 +33,6 @@ platform :android do
     version_name = tag[1..-1]
     version_code = current_build_number
 
-    # The app is built here in opposed to iOS that is built by GitHub Actions
-    # because we want to set the version code and version name on the appbundle
     sh(flutter, "build", "appbundle",  "--build-number", version_code.to_s, "--build-name", version_name, "--target", "lib/main.dart")
 
     # If this stage fails check if there is an existing version with the same version code
