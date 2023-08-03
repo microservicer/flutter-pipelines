@@ -40,7 +40,7 @@ platform :ios do
   lane :integration do
     match(type: 'appstore', readonly: is_ci)
     build_ios_app(
-        export_method: 'development',
+        export_method: 'app-store',
         output_name: 'Runner-development'
     )
   end
