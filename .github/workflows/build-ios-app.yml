@@ -55,14 +55,14 @@ jobs:
           name: ipa-integration
           path: ios/Runner-development.ipa
           if-no-files-found: error
-      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
-      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
-      - name: Archive ipa
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipa
-          path: ios/Runner.ipa
-          if-no-files-found: error
+#      - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
+#      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
+#      - name: Archive ipa
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: ipa
+#          path: ios/Runner.ipa
+#          if-no-files-found: error
   take-screenshot:
     runs-on: macOS-latest
     needs:
@@ -94,4 +94,4 @@ jobs:
           --driver=test_driver/screenshot_test.dart
           --target=integration_test/screenshot_test.dart
           --use-application-binary=build/ios/ipa/Runner.ipa
-          --dart-define=DEVICE_MODEL=${{ matrix.model }}
+          --dart-define=DEVICE_MODEL="${{ matrix.model }}"
