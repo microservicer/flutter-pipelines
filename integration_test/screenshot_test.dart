@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter_pipelines/main.dart' as app;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 void main() {
+  enableFlutterDriverExtension();
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group('Screenshot tests', () {
     setUpAll(() {

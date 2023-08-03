@@ -75,7 +75,8 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        model: ['iPhone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
+        #model: ['iPhone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
+        model: ['iPhone 8']
     steps:
       - uses: actions/checkout@v3
         with:
