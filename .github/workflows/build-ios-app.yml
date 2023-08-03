@@ -72,7 +72,7 @@ jobs:
     runs-on: macOS-latest
     needs:
       - build
-    timeout-minutes: 10
+    timeout-minutes: 15
     strategy:
       matrix:
         #model: ['iPhone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
@@ -105,4 +105,10 @@ jobs:
         with:
           name: screenshot-${{ matrix.model }}
           path: screenshots
+          if-no-files-found: error
+      - name: Archive built ipa
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-drive-build
+          path: build/ios/iphonesimulator/Runner.app
           if-no-files-found: error
