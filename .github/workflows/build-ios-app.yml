@@ -21,7 +21,7 @@ on:
           - beta
 jobs:
   build:
-    runs-on: macOS-latest-xl
+    runs-on: macOS-13-xl
     timeout-minutes: 20
     defaults:
       run:
@@ -69,7 +69,7 @@ jobs:
 #          path: ios/Runner.ipa
 #          if-no-files-found: error
   take-screenshot:
-    runs-on: macOS-latest
+    runs-on: macOS-13-xl
     needs:
       - build
     timeout-minutes: 15
@@ -109,6 +109,6 @@ jobs:
       - name: Archive built ipa
         uses: actions/upload-artifact@v3
         with:
-          name: app-drive-build
+          name: app-drive-build.app
           path: build/ios/iphonesimulator/Runner.app
           if-no-files-found: error
