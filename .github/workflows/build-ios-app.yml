@@ -98,7 +98,8 @@ jobs:
       - run: >-
           flutter drive
           --driver=test_driver/screenshot_test.dart
-          --use-application-binary=build/ios/iphonesimulator/Runner.app
+          --target=integration_test/screenshot_test.dart
+ #         --use-application-binary=build/ios/iphonesimulator/Runner.app
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
         with:
