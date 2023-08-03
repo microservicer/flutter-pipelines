@@ -57,13 +57,10 @@ platform :ios do
         skip_waiting_for_build_processing: true,
     )
   end
-end
 
-platform :certs do
   lane :register do
     register_devices(devices_file: './fastlane/devices.txt')
     match(readonly: false)
     match(type: 'development', force_for_new_devices: true, readonly: false)
   end
 end
-

@@ -89,7 +89,7 @@ jobs:
       - uses: futureware-tech/simulator-action@v2
         with:
           model: ${{ matrix.model }}
-      - run: |
+      - run: >-
           flutter drive
           --driver=test_driver/screenshot_test.dart
           --target=integration_test/screenshot_test.dart
