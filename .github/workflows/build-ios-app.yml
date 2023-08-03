@@ -95,10 +95,11 @@ jobs:
       - uses: futureware-tech/simulator-action@v2
         with:
           model: ${{ matrix.model }}
+
+      #        --target=integration_test/screenshot_test.dart
       - run: >-
           flutter drive
           --driver=test_driver/screenshot_test.dart
-  #        --target=integration_test/screenshot_test.dart
           --use-application-binary=build/ios/iphonesimulator/Runner.app
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
