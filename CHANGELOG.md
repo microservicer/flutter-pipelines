@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/microservicer/flutter-pipelines/compare/v0.7.0...v0.8.0) (2023-08-04)
+
+
+### Features
+
+* Add changelog commit ([2a8e306](https://github.com/microservicer/flutter-pipelines/commit/2a8e306bf777b20b1d41c388ff64de09654461bf))
+
 #  (2023-08-03)
 
 
