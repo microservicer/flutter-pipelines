@@ -1,3 +1,10 @@
+## [0.12.1](https://github.com/microservicer/flutter-pipelines/compare/v0.12.0...v0.12.1) (2023-08-04)
+
+
+### Bug Fixes
+
+* set Android SDK version as env ([9259849](https://github.com/microservicer/flutter-pipelines/commit/9259849d7615adb1a6ca1173da275da4791d4de9))
+
 # [0.12.0](https://github.com/microservicer/flutter-pipelines/compare/v0.11.0...v0.12.0) (2023-08-04)
 
 
