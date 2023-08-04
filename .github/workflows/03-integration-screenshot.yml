@@ -94,7 +94,7 @@ jobs:
     needs:
       - build
     env:
-      ANDROID_SDK_VERSION: 29
+      API_LEVEL: 29
     strategy:
       matrix:
         model: ['Nexus 6']
@@ -122,13 +122,13 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ env.ANDROID_SDK_VERSION }}
+          key: avd-${{ env.API_LEVEL }}
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ env.ANDROID_SDK_VERSION }}
+          api-level: ${{ env.API_LEVEL }}
           profile: ${{ matrix.model }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -138,10 +138,10 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ env.ANDROID_SDK_VERSION }}
+          api-level: ${{ env.API_LEVEL }}
           profile: ${{ matrix.model }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-snapshot-save -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: >-
             flutter drive
