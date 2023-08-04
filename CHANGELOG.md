@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/microservicer/flutter-pipelines/compare/v0.9.0...v0.10.0) (2023-08-04)
+
+
+### Features
+
+* Clean up workflows ([9a9a17e](https://github.com/microservicer/flutter-pipelines/commit/9a9a17e570de26254dcc9b59d73bbbb310fd53b8))
+
 # [0.9.0](https://github.com/microservicer/flutter-pipelines/compare/v0.8.0...v0.9.0) (2023-08-04)
 
 
