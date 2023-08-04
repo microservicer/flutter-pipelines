@@ -121,6 +121,7 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+      - run: flutter build apk --debug --target=integration_test/screenshot_test.dart
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -150,12 +151,11 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          working-directory: ./android
           #            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
           script: >-
             flutter drive
             --driver=test_driver/screenshot_test.dart
-            --target=integration_test/screenshot_test.dart
+            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
 
 
       - name: Archive screenshots
