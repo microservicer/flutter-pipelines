@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-    if: false
     runs-on: macos-latest-xl
     timeout-minutes: 20
     defaults:
@@ -92,8 +91,9 @@ jobs:
           retention-days: 7
   take-screenshot-android:
     runs-on: macos-latest-xl
-#    needs:
-#      - build
+    needs:
+      - build
+    timeout-minutes: 15
     env:
       API_LEVEL: 29
     strategy:
@@ -104,7 +104,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Download app
-        if: false
         uses: actions/download-artifact@v3
         with:
           name: app-apk-build
@@ -121,7 +120,6 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build apk --debug --target=integration_test/screenshot_test.dart
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -151,7 +149,6 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          #            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
           script: >-
             flutter drive
             --driver=test_driver/screenshot_test.dart
