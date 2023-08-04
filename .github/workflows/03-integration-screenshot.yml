@@ -91,14 +91,14 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   take-screenshot-android:
-    runs-on: macos-latest
+    runs-on: macos-latest-xl
 #    needs:
 #      - build
     env:
       API_LEVEL: 29
     strategy:
       matrix:
-        model: ['Nexus 6']
+        model: ['pixel_6']
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -111,7 +111,6 @@ jobs:
           path: build/app/outputs/flutter-apk/app-debug.apk
 
       - name: Flutter
-        if: false
         uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -139,7 +138,6 @@ jobs:
           script: avdmanager list device
 
       - name: run tests
-        if: false
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ env.API_LEVEL }}
@@ -148,13 +146,14 @@ jobs:
           emulator-options: -no-snapshot-save -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           working-directory: ./android
+          #            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
           script: >-
             flutter drive
             --driver=test_driver/screenshot_test.dart
-            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
+            --target=integration_test/screenshot_test.dart
+
 
       - name: Archive screenshots
-        if: false
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-${{ matrix.model }}
