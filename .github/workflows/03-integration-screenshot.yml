@@ -150,6 +150,7 @@ jobs:
             --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
 
       - name: Archive screenshots
+        if: false
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-${{ matrix.model }}
