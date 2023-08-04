@@ -107,7 +107,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: app-apk-build
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          path: app-debug.apk
 
       - uses: actions/setup-java@v3
         with:
@@ -139,7 +139,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: avdmanager list device
+          script: avdmanager list device && pwd && ls
 
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -152,7 +152,7 @@ jobs:
           script: >-
             flutter drive
             --driver=test_driver/screenshot_test.dart
-            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
+            --use-application-binary=app-debug.apk
 
 
       - name: Archive screenshots
