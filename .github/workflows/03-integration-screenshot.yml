@@ -98,7 +98,7 @@ jobs:
       API_LEVEL: 29
     strategy:
       matrix:
-        model: ['Pixel 6']
+        model: ['Nexus 6']
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -136,7 +136,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
+          script: avdmanager list device
 
       - name: run tests
         if: false
