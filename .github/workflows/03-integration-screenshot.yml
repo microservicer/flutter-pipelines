@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+
+env:
+  ANDROID_SDK_VERSION: 21
+
 jobs:
   build:
     runs-on: macOS-latest-xl
@@ -98,13 +102,13 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
+          key: avd-$ANDROID_SDK_VERSION
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 21
+          api-level: $ANDROID_SDK_VERSION
           profile: ${{ matrix.model }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -114,7 +118,7 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 21
+          api-level: $ANDROID_SDK_VERSION
           profile: ${{ matrix.model }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
