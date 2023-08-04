@@ -1,15 +1,15 @@
 name: build-ios-app
 on:
-#  workflow_run:
-#    workflows: ["Generate Changelog"]
-#    branches: [main]
-#    types:
-#      - completed
-#    paths:
-#      - ios/**
-#      - lib/**
-#      - '*'
-#      - .github/workflows/build-ios-app.yml
+  workflow_run:
+    workflows: ["Generate Changelog"]
+    branches: [main]
+    types:
+      - completed
+    paths:
+      - ios/**
+      - lib/**
+      - '*'
+      - .github/workflows/build-ios-app.yml
   workflow_dispatch:
     inputs:
       lane:
