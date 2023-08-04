@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     if: false
-    runs-on: macOS-latest-xl
+    runs-on: macos-latest-xl
     timeout-minutes: 20
     defaults:
       run:
@@ -50,7 +50,7 @@ jobs:
 
   take-screenshot-ios:
     if: false # Disable for now
-    runs-on: macOS-latest
+    runs-on: macos-latest
     needs:
       - build
     timeout-minutes: 15
@@ -149,7 +149,7 @@ jobs:
           api-level: ${{ env.API_LEVEL }}
           profile: ${{ matrix.model }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           #            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
           script: >-
