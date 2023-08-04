@@ -110,6 +110,11 @@ jobs:
           name: app-apk-build
           path: build/app/outputs/flutter-apk/app-debug.apk
 
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
       - name: Flutter
         uses: subosito/flutter-action@v2
         with:
