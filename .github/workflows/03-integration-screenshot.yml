@@ -94,10 +94,10 @@ jobs:
     needs:
       - build
     env:
-      API_LEVEL: 29
+      API_LEVEL: 31
     strategy:
       matrix:
-        model: ['Nexus 6']
+        model: ['Pixel 5']
     steps:
       - name: checkout
         uses: actions/checkout@v3
