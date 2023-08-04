@@ -150,10 +150,10 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: >-
-            pwd && ls &&
+            pwd && ls -l &&
             flutter drive
             --driver=test_driver/screenshot_test.dart
-            --use-application-binary=app-debug.apk
+            --use-application-binary=/Users/runner/work/flutter-pipelines/flutter-pipelines/app-debug.apk
 
 
       - name: Archive screenshots
