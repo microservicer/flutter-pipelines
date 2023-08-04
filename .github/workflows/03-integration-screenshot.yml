@@ -1,5 +1,9 @@
 name: integration-screenshot
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
   build:
     runs-on: macOS-latest-xl
@@ -11,27 +15,33 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Flutter
         uses: subosito/flutter-action@v2
         with:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build ios --simulator --target=integration_test/screenshot_test.dart
+#      - run: flutter build ios --simulator --target=integration_test/screenshot_test.dart
       - run: flutter build apk --debug --target=integration_test/screenshot_test.dart
-      - name: Archive integration ipa
-        uses: actions/upload-artifact@v3
-        with:
-           name: app-simulator-build
-           path: build/ios/iphonesimulator/Runner.app
-           if-no-files-found: error
+#      - name: Archive integration ipa
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: app-simulator-build
+#          path: build/ios/iphonesimulator/Runner.app
+#          if-no-files-found: error
+#          retention-days: 3
+
       - name: Archive integration apk
         uses: actions/upload-artifact@v3
         with:
           name: app-apk-build
           path: build/app/outputs/flutter-apk/app-debug.apk
           if-no-files-found: error
-  take-screenshot:
+          retention-days: 3
+
+  take-screenshot-ios:
+    if: false # Disable for now
     runs-on: macOS-latest
     needs:
       - build
@@ -44,11 +54,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Download app
         uses: actions/download-artifact@v3
         with:
           name: app-simulator-build
           path: build/ios/iphonesimulator/Runner.app
+
       - name: Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -62,15 +74,60 @@ jobs:
           flutter drive
           --driver=test_driver/screenshot_test.dart
           --use-application-binary=build/ios/iphonesimulator/Runner.app
+
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-${{ matrix.model }}
           path: screenshots
           if-no-files-found: error
-      - name: Archive built ipa
+          retention-days: 7
+  take-screenshot-android:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        model: ['Nexus 6']
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ matrix.api-level }}
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 21
+          profile: ${{ matrix.model }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 21
+          profile: ${{ matrix.model }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: >-
+            flutter drive
+            --driver=test_driver/screenshot_test.dart
+            --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
+
+      - name: Archive screenshots
         uses: actions/upload-artifact@v3
         with:
-          name: app-drive-build.app
-          path: build/ios/iphonesimulator/Runner.app
+          name: screenshot-${{ matrix.model }}
+          path: screenshots
           if-no-files-found: error
+          retention-days: 7
