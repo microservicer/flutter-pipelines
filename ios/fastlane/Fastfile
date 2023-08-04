@@ -37,14 +37,6 @@ platform :ios do
     )
   end
 
-  lane :integration do
-    match(type: 'appstore', readonly: is_ci)
-    build_ios_app(
-        export_method: 'app-store',
-        output_name: 'Runner-development'
-    )
-  end
-
   lane :beta do
     match(type: 'appstore', readonly: is_ci)
     build_ios_app(

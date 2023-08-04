@@ -10,6 +10,10 @@
 
 This repository contains the infrastructure code for deploying a Flutter mobile app to the Play Store and App Store.
 
+It is an opinionated setup that is focused on using a native Flutter approach to building and deploying the app.
+It is also focused on GitOps so that all changes are tracked within this repository.
+The only exception is the Fastlane Match certificates and profiles that are stored in a separate repository, depending on your setup.
+
 ## Overview
 
 The Flutter mobile app pipelines are a set of pipelines that are used to build and test the Flutter mobile app.

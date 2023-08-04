@@ -1,11 +1,14 @@
 name: Conventional Release
-'on':
-  push:
-    branches:
-      - main
+on:
+  workflow_run:
+    workflows: ["build"]
+    branches: [main]
+    types:
+      - completed
 jobs:
   release:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
         with:
