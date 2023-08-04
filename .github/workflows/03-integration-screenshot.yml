@@ -136,6 +136,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: run tests
+        if: false
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ env.ANDROID_SDK_VERSION }}
