@@ -3,7 +3,7 @@
   <a href="https://github.com/microservicer/flutter-pipelines/actions?query=workflow%3Abuild-ios-app+branch%3Amaster">
     <img alt="Build states" src="https://github.com/semantic-release/semantic-release/workflows/Test/badge.svg">
   </a>
-  <a>
+  <a href="https://github.com/semantic-release/semantic-release">
     <img alt="semantic-release: angular" src="https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release">
   </a>
 </p>
