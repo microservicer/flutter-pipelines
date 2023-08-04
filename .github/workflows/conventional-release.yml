@@ -11,12 +11,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Determine version
-        uses: extenda/actions/conventional-version@v0
-        id: semver
-
-      - name: Create release
-        uses: extenda/actions/conventional-release@v0
-        id: release
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
