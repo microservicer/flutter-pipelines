@@ -1,3 +1,10 @@
+# [0.12.0](https://github.com/microservicer/flutter-pipelines/compare/v0.11.0...v0.12.0) (2023-08-04)
+
+
+### Features
+
+* Add Android screenshot taker ([784ba12](https://github.com/microservicer/flutter-pipelines/commit/784ba1246ff5e10c80cbdc0226c2f70eb6500121))
+
 # [0.11.0](https://github.com/microservicer/flutter-pipelines/compare/v0.10.0...v0.11.0) (2023-08-04)
 
 
