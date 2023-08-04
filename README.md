@@ -1,4 +1,12 @@
 # Flutter Mobile App Pipelines Infrastructure
+<p>
+  <a href="https://github.com/microservicer/flutter-pipelines/actions?query=workflow%3ATest+branch%3Amaster">
+    <img alt="Build states" src="https://github.com/semantic-release/semantic-release/workflows/Test/badge.svg">
+  </a>
+  <a>
+    <img alt="semantic-release: angular" src="https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release">
+  </a>
+</p>
 
 This repository contains the infrastructure code for deploying a Flutter mobile app to the Play Store and App Store.
 
