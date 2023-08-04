@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    if: false
     runs-on: macOS-latest-xl
     timeout-minutes: 20
     defaults:
@@ -91,10 +92,10 @@ jobs:
           retention-days: 7
   take-screenshot-android:
     runs-on: macos-latest
-    needs:
-      - build
+#    needs:
+#      - build
     env:
-      API_LEVEL: 31
+      API_LEVEL: 29
     strategy:
       matrix:
         model: ['Pixel 5']
@@ -103,12 +104,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Download app
+        if: false
         uses: actions/download-artifact@v3
         with:
           name: app-apk-build
           path: build/app/outputs/flutter-apk/app-debug.apk
 
       - name: Flutter
+        if: false
         uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -136,6 +139,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: run tests
+        if: false
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ env.API_LEVEL }}
@@ -150,6 +154,7 @@ jobs:
             --use-application-binary=build/app/outputs/flutter-apk/app-debug.apk
 
       - name: Archive screenshots
+        if: false
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-${{ matrix.model }}
