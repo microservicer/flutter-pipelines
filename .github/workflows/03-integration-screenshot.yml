@@ -89,7 +89,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   take-screenshot-android:
-    runs-on: macos-12-xl
+    runs-on: macos-12
     needs:
       - build
     timeout-minutes: 15
