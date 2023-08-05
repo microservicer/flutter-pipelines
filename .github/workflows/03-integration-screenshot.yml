@@ -90,7 +90,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   take-screenshot-android:
-    runs-on: macos-latest-xl
+    runs-on: macos-13
     defaults:
       run:
         working-directory: android
