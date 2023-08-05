@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/microservicer/flutter-pipelines/compare/v0.13.1...v0.14.0) (2023-08-05)
+
+
+### Features
+
+* Deploy on App Store ([6454501](https://github.com/microservicer/flutter-pipelines/commit/6454501d664e6be9cb9095e834143cb625bd4748))
+
 ## [0.13.1](https://github.com/microservicer/flutter-pipelines/compare/v0.13.0...v0.13.1) (2023-08-05)
 
 
