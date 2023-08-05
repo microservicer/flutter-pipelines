@@ -42,7 +42,7 @@ jobs:
       - name: Archive integration apk
         uses: actions/upload-artifact@v3
         with:
-          name: app-apk-build
+          name: app-debug.apk
           path: build/app/outputs/flutter-apk/app-debug.apk
           if-no-files-found: error
           retention-days: 3
@@ -91,9 +91,6 @@ jobs:
           retention-days: 7
   take-screenshot-android:
     runs-on: macos-12-xl
-    defaults:
-      run:
-        working-directory: android
     needs:
       - build
     timeout-minutes: 15
@@ -118,8 +115,10 @@ jobs:
       - name: Download app
         uses: actions/download-artifact@v3
         with:
-          name: app-apk-build
-          path: app-debug.apk
+          name: app-debug.apk
+
+      - name: Display structure of downloaded files
+        run: ls -R
 
       - name: Flutter
         if: false
@@ -162,15 +161,10 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: >-
-            pwd && ls -lh &&
-            flutter drive
-            --driver=test_driver/screenshot_test.dart
-            --use-application-binary=/Users/runner/work/flutter-pipelines/flutter-pipelines/app-debug.apk
+          script: "flutter drive --driver=test_driver/screenshot_test.dart --use-application-binary=app-debug.apk"
 
 
       - name: Archive screenshots
-        if: false
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-${{ matrix.model }}
