@@ -104,11 +104,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
@@ -116,9 +111,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: app-debug.apk
-
-      - name: Display structure of downloaded files
-        run: ls -R
 
       - name: Flutter
         uses: subosito/flutter-action@v2
@@ -169,11 +161,3 @@ jobs:
           path: screenshots
           if-no-files-found: error
           retention-days: 7
-
-      - name: Archive integration apk
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-apk-build-temp
-          path: app-debug.apk
-          if-no-files-found: error
-          retention-days: 3
