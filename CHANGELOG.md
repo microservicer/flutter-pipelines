@@ -1,3 +1,10 @@
+# [0.13.0](https://github.com/microservicer/flutter-pipelines/compare/v0.12.2...v0.13.0) (2023-08-05)
+
+
+### Features
+
+* Add screenshot commit ([96ea796](https://github.com/microservicer/flutter-pipelines/commit/96ea796f3de0e64ad20dbb7ee088a7be4d7ebab6))
+
 ## [0.12.2](https://github.com/microservicer/flutter-pipelines/compare/v0.12.1...v0.12.2) (2023-08-04)
 
 
