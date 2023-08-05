@@ -91,6 +91,9 @@ jobs:
           retention-days: 7
   take-screenshot-android:
     runs-on: macos-latest-xl
+    defaults:
+      run:
+        working-directory: android
     needs:
       - build
     timeout-minutes: 15
@@ -103,16 +106,19 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
       - name: Download app
         uses: actions/download-artifact@v3
         with:
           name: app-apk-build
           path: app-debug.apk
-
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
 
       - name: Flutter
         uses: subosito/flutter-action@v2
@@ -136,6 +142,7 @@ jobs:
         with:
           api-level: ${{ env.API_LEVEL }}
           profile: ${{ matrix.model }}
+          target: google_apis
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
@@ -146,11 +153,12 @@ jobs:
         with:
           api-level: ${{ env.API_LEVEL }}
           profile: ${{ matrix.model }}
+          target: google_apis
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: >-
-            pwd && ls -l &&
+            pwd && ls -lh &&
             flutter drive
             --driver=test_driver/screenshot_test.dart
             --use-application-binary=/Users/runner/work/flutter-pipelines/flutter-pipelines/app-debug.apk
