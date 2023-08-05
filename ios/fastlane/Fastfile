@@ -53,7 +53,8 @@ platform :ios do
   lane :upload_metadata_app_store do
     upload_to_app_store(
         overwrite_screenshots: true,
-        force: true
+        force: true,
+        skip_binary_upload: true,
     )
   end
 
