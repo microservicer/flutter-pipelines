@@ -181,10 +181,14 @@ jobs:
         working-directory: screenshots
 
       - name: Move ios screenshots
-        run: mv screenshots/ios-screenshot-* ios/fastlane/screenshots/${{ matrix.locale }}
+        run: |
+          mkdir -p ios/fastlane/screenshots/${{ matrix.locale }}
+          mv -p screenshots/ios-screenshot-* ios/fastlane/screenshots/${{ matrix.locale }}
 
       - name: Move android screenshots
-        run: mv screenshots/android-screenshot-* android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+        run: |
+          mkdir -p android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+          mv -p screenshots/android-screenshot-* android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
 
       - name: Commit screenshots
         run: |
