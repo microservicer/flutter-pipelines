@@ -84,7 +84,8 @@ jobs:
       - name: Append model name to all files in screenshots folder
         run: |
           for file in screenshots/*; do
-            mv "$file" "${{ matrix.model }}-${file}"
+            filename=$(basename "$file")
+            mv "$file" "screenshots/${{ matrix.model }}-$filename"
           done
 
       - name: Archive screenshots
@@ -161,8 +162,10 @@ jobs:
       - name: Append model name to all files in screenshots folder
         run: |
           for file in screenshots/*; do
-            mv "$file" "${{ matrix.model }}-${file}"
+            filename=$(basename "$file")
+            mv "$file" "screenshots/${{ matrix.model }}-$filename"
           done
+
 
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
