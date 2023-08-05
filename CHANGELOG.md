@@ -1,3 +1,10 @@
+# [0.15.0](https://github.com/microservicer/flutter-pipelines/compare/v0.14.1...v0.15.0) (2023-08-05)
+
+
+### Features
+
+* Add Deliverfile ([ee0d598](https://github.com/microservicer/flutter-pipelines/commit/ee0d59899890b78ce2554d6f8749277ed5b9b360))
+
 ## [0.14.1](https://github.com/microservicer/flutter-pipelines/compare/v0.14.0...v0.14.1) (2023-08-05)
 
 
