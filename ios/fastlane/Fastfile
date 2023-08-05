@@ -44,9 +44,15 @@ platform :ios do
     )
   end
 
-  lane :upload do
-    upload_to_app_store(
+  lane :upload_testflight do
+    upload_to_testflight(
         skip_waiting_for_build_processing: true,
+    )
+  end
+
+  lane :upload_metadata_app_store do
+    upload_to_app_store(
+        overwrite_screenshots: true,
     )
   end
 
@@ -54,5 +60,6 @@ platform :ios do
     register_devices(devices_file: './fastlane/devices.txt')
     match(readonly: false)
     match(type: 'development', force_for_new_devices: true, readonly: false)
+
   end
 end

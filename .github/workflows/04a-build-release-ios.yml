@@ -40,4 +40,5 @@ jobs:
       - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
       - run: bundle exec fastlane versioning
       - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
-      - run: bundle exec fastlane upload
+      - run: bundle exec fastlane upload_testflight
+      - run: bundle exec fastlane upload_metadata_app_store
