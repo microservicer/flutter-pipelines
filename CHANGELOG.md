@@ -1,3 +1,10 @@
+## [0.13.1](https://github.com/microservicer/flutter-pipelines/compare/v0.13.0...v0.13.1) (2023-08-05)
+
+
+### Bug Fixes
+
+* Create dir if not exists ([a72ca64](https://github.com/microservicer/flutter-pipelines/commit/a72ca64f3a68f0f6532d69834e79f3e753070c5d))
+
 # [0.13.0](https://github.com/microservicer/flutter-pipelines/compare/v0.12.2...v0.13.0) (2023-08-05)
 
 
