@@ -95,7 +95,7 @@ jobs:
     timeout-minutes: 15
     env:
       API_LEVEL: 29
-      CORES: 10
+      CORES: 3
     strategy:
       matrix:
         model: ['pixel_6']
