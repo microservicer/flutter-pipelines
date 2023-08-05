@@ -11,7 +11,7 @@ on:
           - beta
 jobs:
   build:
-    runs-on: macOS-13-xl
+    runs-on: macos-latest
     timeout-minutes: 20
     defaults:
       run:
@@ -37,17 +37,7 @@ jobs:
           API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
       - run: bundle install
       - run: bundle exec fastlane versioning
-      - name: Archive integration ipa
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipa-integration
-          path: ios/Runner-development.ipa
-          if-no-files-found: error
       - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
+      - run: bundle exec fastlane versioning
       - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
-      - name: Archive ipa
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipa
-          path: ios/Runner.ipa
-          if-no-files-found: error
+      - run: bundle exec fastlane upload
