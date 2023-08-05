@@ -90,7 +90,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   take-screenshot-android:
-    runs-on: macos-13
+    runs-on: macos-12-xl
     defaults:
       run:
         working-directory: android
@@ -98,7 +98,8 @@ jobs:
       - build
     timeout-minutes: 15
     env:
-      API_LEVEL: 33
+      API_LEVEL: 29
+      CORES: 10
     strategy:
       matrix:
         model: ['pixel_6']
@@ -143,6 +144,7 @@ jobs:
           api-level: ${{ env.API_LEVEL }}
           profile: ${{ matrix.model }}
           target: google_apis
+          cores: ${{ env.CORES }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
@@ -154,6 +156,7 @@ jobs:
           api-level: ${{ env.API_LEVEL }}
           profile: ${{ matrix.model }}
           target: google_apis
+          cores: ${{ env.CORES }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
