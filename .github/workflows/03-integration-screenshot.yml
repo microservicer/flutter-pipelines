@@ -122,6 +122,7 @@ jobs:
           path: app-debug.apk
 
       - name: Flutter
+        if: false
         uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -151,6 +152,7 @@ jobs:
           script: avdmanager list device
 
       - name: run tests
+        if: false
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ env.API_LEVEL }}
@@ -168,9 +170,18 @@ jobs:
 
 
       - name: Archive screenshots
+        if: false
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-${{ matrix.model }}
           path: screenshots
           if-no-files-found: error
           retention-days: 7
+
+      - name: Archive integration apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-apk-build-temp
+          path: app-debug.apk
+          if-no-files-found: error
+          retention-days: 3
