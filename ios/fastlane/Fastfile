@@ -55,6 +55,7 @@ platform :ios do
         overwrite_screenshots: true,
         force: true,
         skip_binary_upload: true,
+        precheck_include_in_app_purchases: false,
     )
   end
 
