@@ -1,6 +1,7 @@
 app_review_information(
   first_name: "Wilhelm",
   last_name: "Perdahl",
+  phone_number: "+46 705492137",
   email_address: "info@microservicer.org",
   demo_user: "demoUser",
   demo_password: "demoPass",
