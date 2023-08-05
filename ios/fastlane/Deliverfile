@@ -1,0 +1,8 @@
+app_review_information(
+  first_name: "Wilhelm",
+  last_name: "Perdahl",
+  email_address: "info@microservicer.org",
+  demo_user: "demoUser",
+  demo_password: "demoPass",
+  notes: "such notes, very text"
+)
