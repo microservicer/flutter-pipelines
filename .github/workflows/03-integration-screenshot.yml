@@ -121,7 +121,6 @@ jobs:
         run: ls -R
 
       - name: Flutter
-        if: false
         uses: subosito/flutter-action@v2
         with:
           cache: true
@@ -151,7 +150,6 @@ jobs:
           script: avdmanager list device
 
       - name: run tests
-        if: false
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ env.API_LEVEL }}
