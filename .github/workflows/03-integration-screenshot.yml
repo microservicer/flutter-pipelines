@@ -98,7 +98,7 @@ jobs:
       - build
     timeout-minutes: 15
     env:
-      API_LEVEL: 29
+      API_LEVEL: 33
     strategy:
       matrix:
         model: ['pixel_6']
