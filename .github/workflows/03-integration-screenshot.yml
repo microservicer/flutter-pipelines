@@ -81,6 +81,12 @@ jobs:
           --driver=test_driver/screenshot_test.dart
           --use-application-binary=build/ios/iphonesimulator/Runner.app
 
+      - name: Append model name to all files in screenshots folder
+        run: |
+          for file in screenshots/*; do
+            mv "$file" "${file}-${{ matrix.model }}"
+          done
+
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
         with:
@@ -152,6 +158,12 @@ jobs:
           disable-animations: true
           script: "flutter drive --driver=test_driver/screenshot_test.dart --use-application-binary=app-debug.apk"
 
+      - name: Append model name to all files in screenshots folder
+        run: |
+          for file in screenshots/*; do
+            mv "$file" "${file}-${{ matrix.model }}"
+          done
+
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
         with:
@@ -183,12 +195,12 @@ jobs:
       - name: Move ios screenshots
         run: |
           mkdir -p ios/fastlane/screenshots/${{ matrix.locale }}
-          mv screenshots/ios-screenshot-* ios/fastlane/screenshots/${{ matrix.locale }}
+          cp screenshots/ios-screenshot-* ios/fastlane/screenshots/${{ matrix.locale }}
 
       - name: Move android screenshots
         run: |
           mkdir -p android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
-          mv screenshots/android-screenshot-* android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+          cp screenshots/android-screenshot-* android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
 
       - name: Commit screenshots
         run: |
