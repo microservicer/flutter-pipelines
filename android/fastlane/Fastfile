@@ -53,6 +53,6 @@ platform :android do
 
     lane :build do
         flutter = ENV['FLUTTER']
-        sh("flutter", "build", "appbundle",  "--build-number", ENV["ANDROID_VERSION_CODE"], "--build-name", ENV["ANDROID_VERSION_NAME"], "--target", "lib/main.dart")
+        sh("flutter", "build", "appbundle",  "--build-number", ENV["ANDROID_VERSION_CODE"].to_s, "--build-name", ENV["ANDROID_VERSION_NAME"], "--target", "lib/main.dart")
     end
 end
