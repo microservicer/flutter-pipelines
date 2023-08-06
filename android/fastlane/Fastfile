@@ -31,8 +31,6 @@ platform :android do
 
         tag = last_git_tag(pattern: "v[0-9].*")
 
-        flutter = ENV['FLUTTER']
-
         ENV["ANDROID_VERSION_NAME"] = tag[1..-1]
         ENV["ANDROID_VERSION_CODE"] = current_build_number.to_s
     end
@@ -54,6 +52,7 @@ platform :android do
     end
 
     lane :build do
-        sh(flutter, "build", "appbundle",  "--build-number", ENV["ANDROID_VERSION_CODE"], "--build-name", ENV["ANDROID_VERSION_NAME"], "--target", "lib/main.dart")
+        flutter = ENV['FLUTTER']
+        sh("flutter", "build", "appbundle",  "--build-number", ENV["ANDROID_VERSION_CODE"], "--build-name", ENV["ANDROID_VERSION_NAME"], "--target", "lib/main.dart")
     end
 end
