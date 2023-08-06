@@ -18,15 +18,15 @@ default_platform(:android)
 platform :android do
 
     before_all do |lane, options|
+        setup_ci if ENV['CI']
+    end
+
+    lane :versioning do
         json_key = ENV['PLAY_STORE_CONFIG_JSON'] ? ENV['PLAY_STORE_CONFIG_JSON'] : File.read("../key.json")
         previous_build_number = google_play_track_version_codes(
           track: "internal",
           json_key_data: json_key,
         )[0]
-        setup_ci if ENV['CI']
-    end
-
-    lane :versioning do
         current_build_number = previous_build_number + 1
 
         tag = last_git_tag(pattern: "v[0-9].*")
