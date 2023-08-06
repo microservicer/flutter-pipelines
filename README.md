@@ -7,9 +7,7 @@ It is an opinionated setup that is focused on using a native Flutter approach to
 It is also focused on GitOps so that all changes are tracked within this repository.
 The only exception is the Fastlane Match certificates and profiles that are stored in a separate repository, depending on your setup.
 
-
-
-[﻿View on canvas](https://app.eraser.io/workspace/ajpbJwx0o7yCsztjRfkP?elements=fjepGwUdDRXZelxfFWpaVA) 
+![Figure 1](/.eraser/ajpbJwx0o7yCsztjRfkP___mWf9ulN3fVP9AukUG2H0RF9fwjq2___---figure---heXFJj3ZPRNXhZZvlZQqU---figure---Gv7OlimrLwsL1zx31Bjlsw.png "Figure 1")
 
 ## Overview
 The Flutter mobile app pipelines are a set of pipelines that are used to build and test the Flutter mobile app.
