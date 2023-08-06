@@ -18,11 +18,11 @@ default_platform(:android)
 platform :android do
 
     before_all do |lane, options|
-        app_store_connect_api_key(
-          key_id: '4H27D3QLG2',
-          issuer_id: 'ec2c19af-8deb-4579-be01-5d677995d709',
-          key_filepath: './AuthKey.p8'
-        )
+        json_key = ENV['PLAY_STORE_CONFIG_JSON'] ? ENV['PLAY_STORE_CONFIG_JSON'] : File.read("../key.json")
+        previous_build_number = google_play_track_version_codes(
+          track: "internal",
+          json_key_data: json_key,
+        )[0]
         setup_ci if ENV['CI']
     end
 
