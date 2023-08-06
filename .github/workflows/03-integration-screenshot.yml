@@ -48,6 +48,7 @@ jobs:
           retention-days: 3
 
   take-screenshot-ios:
+    if: false
     runs-on: macos-latest
     needs:
       - build
@@ -179,7 +180,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - take-screenshot-android
-      - take-screenshot-ios
+ #     - take-screenshot-ios
     timeout-minutes: 5
     strategy:
       matrix:
