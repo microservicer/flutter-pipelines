@@ -1,6 +1,14 @@
-<p><a target="_blank" href="https://app.eraser.io/workspace/ajpbJwx0o7yCsztjRfkP" id="edit-in-eraser-github-link"><img alt="Edit in Eraser" src="https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fgithub%2FOpen%20in%20Eraser.svg?alt=media&amp;token=968381c8-a7e7-472a-8ed6-4a6626da5501"></a></p>
 
 # Flutter Mobile App Pipelines Infrastructure
+<p>
+  <a href="https://github.com/microservicer/flutter-pipelines/actions?query=workflow%3Abuild-ios-app+branch%3Amaster">
+    <img alt="Build states" src="https://github.com/semantic-release/semantic-release/workflows/Test/badge.svg">
+  </a>
+  <a href="https://github.com/semantic-release/semantic-release">
+    <img alt="semantic-release: angular" src="https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release">
+  </a>
+<a target="_blank" href="https://app.eraser.io/workspace/ajpbJwx0o7yCsztjRfkP" id="edit-in-eraser-github-link"><img alt="Edit in Eraser" src="https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fgithub%2FOpen%20in%20Eraser.svg?alt=media&amp;token=968381c8-a7e7-472a-8ed6-4a6626da5501"></a>
+</p>
 This repository contains the infrastructure code for deploying a Flutter mobile app to the Play Store and App Store.
 
 It is an opinionated setup that is focused on using a native Flutter approach to building and deploying the app.
