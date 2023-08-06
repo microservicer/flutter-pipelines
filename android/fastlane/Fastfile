@@ -16,39 +16,45 @@
 default_platform(:android)
 
 platform :android do
-  desc "Deploy a new version to the Google Play internal track"
-  lane :internal do
-    json_key = ENV['PLAY_STORE_CONFIG_JSON'] ? ENV['PLAY_STORE_CONFIG_JSON'] : File.read("../key.json")
-    previous_build_number = google_play_track_version_codes(
-      track: "internal",
-      json_key_data: json_key,
-    )[0]
 
-    current_build_number = previous_build_number + 1
+    before_all do |lane, options|
+        app_store_connect_api_key(
+          key_id: '4H27D3QLG2',
+          issuer_id: 'ec2c19af-8deb-4579-be01-5d677995d709',
+          key_filepath: './AuthKey.p8'
+        )
+        setup_ci if ENV['CI']
+    end
 
-    tag = last_git_tag(pattern: "v[0-9].*")
+    lane :versioning do
+        current_build_number = previous_build_number + 1
 
-    flutter = ENV['FLUTTER']
+        tag = last_git_tag(pattern: "v[0-9].*")
 
-    version_name = tag[1..-1]
-    version_code = current_build_number
+        flutter = ENV['FLUTTER']
 
-    sh(flutter, "build", "appbundle",  "--build-number", version_code.to_s, "--build-name", version_name, "--target", "lib/main.dart")
+        ENV["ANDROID_VERSION_NAME"] = tag[1..-1]
+        ENV["ANDROID_VERSION_CODE"] = current_build_number
+    end
 
-    # If this stage fails check if there is an existing version with the same version code
-    # If so, delete it from the Google Play Console or manually increment the version code to a latter value
-    upload_to_play_store(
-        version_name: version_name,
-        version_code: version_code,
-        skip_upload_apk: true,
-        skip_upload_images: true,
-        skip_upload_screenshots: true,
-        skip_upload_changelogs: true,
-        track: "internal",
-        aab: "../build/app/outputs/bundle/release/app-release.aab",
-        json_key_data: json_key,
-        # Change to "completed" once your app is ready to publish
-        release_status: "draft",
-    )
+
+    desc "Deploy a new version to the Google Play internal track"
+    lane :internal do
+        # If this stage fails check if there is an existing version with the same version code
+        # If so, delete it from the Google Play Console or manually increment the version code to a latter value
+        upload_to_play_store(
+            skip_upload_apk: true,
+            skip_upload_changelogs: true,
+            track: "internal",
+            aab: "../build/app/outputs/bundle/release/app-release.aab",
+            json_key_data: json_key,
+            # Change to "completed" once your app is ready to publish
+            release_status: "draft",
+        )
+    end
+
+    lane :build do
+        sh(flutter, "build", "appbundle",  "--build-number", ENV["ANDROID_VERSION_CODE"].to_s, "--build-name", ENV["ANDROID_VERSION_NAME"], "--target", "lib/main.dart")
+    end
   end
 end

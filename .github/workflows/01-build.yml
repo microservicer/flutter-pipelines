@@ -1,4 +1,4 @@
-name: build
+name: test-analyze
 on:
   push:
   pull_request:
