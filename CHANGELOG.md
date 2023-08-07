@@ -1,3 +1,10 @@
+## [0.17.3](https://github.com/microservicer/flutter-pipelines/compare/v0.17.2...v0.17.3) (2023-08-07)
+
+
+### Bug Fixes
+
+* Add secrets inherit ([456b364](https://github.com/microservicer/flutter-pipelines/commit/456b364799a8ece576c06630f56091b78d4a1c2a))
+
 ## [0.17.2](https://github.com/microservicer/flutter-pipelines/compare/v0.17.1...v0.17.2) (2023-08-07)
 
 
