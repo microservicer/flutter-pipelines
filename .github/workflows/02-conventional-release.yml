@@ -2,7 +2,10 @@ name: conventional-release
 on:
  workflow_call:
    outputs:
-     new_release_published: ${{ jobs.conventional-release.outputs.new_release_published }}
+     new_release_published:
+      description: 'If a new release was published'
+      value: ${{ jobs.conventional-release.outputs.new_release_published }}
+      type: boolean
 
 jobs:
   conventional-release:

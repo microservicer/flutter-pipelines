@@ -3,7 +3,10 @@ name: parse-screenshot
 on:
   workflow_call:
     outputs:
-      contains_screenshot: ${{ jobs.check_commit_message.outputs.contains_screenshot }}
+      contains_screenshot:
+        description: 'If commit message contains screenshot keyword'
+        value: ${{ jobs.check_commit_message.outputs.contains_screenshot }}
+        type: boolean
 
 jobs:
   check_commit_message:
