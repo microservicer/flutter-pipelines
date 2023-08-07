@@ -1,7 +1,7 @@
 name: conventional-release
 on:
   workflow_run:
-    workflows: ["build"]
+    workflows: ["test-analyze"]
     branches: [main]
     types:
       - completed
