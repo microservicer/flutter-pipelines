@@ -25,6 +25,7 @@ jobs:
     uses: ./.github/workflows/03a-build-ios.yml
     with:
       screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
+    secrets: inherit
 
   upload-ios:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'false' }}
@@ -32,6 +33,7 @@ jobs:
       - parse-screenshot
       - build-ios
     uses: ./.github/workflows/21a-upload-release-ios.yml
+    secrets: inherit
 
   build-android:
     if: ${{ needs.conventional-release.outputs.new_release_published == 'true' }}
@@ -41,6 +43,7 @@ jobs:
     uses: ./.github/workflows/03b-build-android.yml
     with:
       screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
+    secrets: inherit
 
   upload-android:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'false' }}
@@ -48,6 +51,7 @@ jobs:
       - parse-screenshot
       - build-android
     uses: ./.github/workflows/21b-upload-release-android.yml
+    secrets: inherit
 
   integration-screenshot-ios:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
@@ -74,8 +78,10 @@ jobs:
     needs:
       - integration-screenshot-commit
     uses: ./.github/workflows/21a-upload-release-ios.yml
+    secrets: inherit
 
   upload-android-screenhot:
     needs:
       - integration-screenshot-commit
     uses: ./.github/workflows/21b-upload-release-android.yml
+    secrets: inherit
