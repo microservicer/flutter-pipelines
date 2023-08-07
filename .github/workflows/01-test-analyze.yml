@@ -1,6 +1,7 @@
 name: test-analyze
 on:
   workflow_call:
+
 jobs:
   build:
     runs-on: ubuntu-latest

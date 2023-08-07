@@ -1,6 +1,7 @@
 name: conventional-release
 on:
  workflow_call:
+
 jobs:
   conventional-release:
     runs-on: ubuntu-latest

@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - master
+
 jobs:
   test-analyze:
     uses: ./.github/workflows/01-test-analyze.yml
@@ -67,7 +68,7 @@ jobs:
     needs:
       - integration-screenshot-ios
       - integration-screenshot-android
-    uses: ./.github/workflows/12c-integration-screenshot-commit.yml
+    uses: ./.github/workflows/13-integration-screenshot-commit.yml
 
   upload-ios-screenhot:
     needs:
