@@ -249,6 +249,12 @@ Then run the following command in the `android` directory:
 ```bash
 bundle exec fastlane android internal
 ```
+
+## Common errors:
+
+- `"Failed to read key  from store "../android/app/upload-keystore.jks": Tag number over 30 is not supported"` 
+  This means that you missed to upload the keystore to GitHub secrets. Remember to base64 encode it first!
+
 ## Resources
 - [﻿Guide](https://keyholesoftware.com/2023/02/13/automating-flutter-deployments-part-2-screenshots/)  on how to set up screenshots for the App Store and Play Store
 - [﻿Flutter Integration Test](https://flutter.dev/docs/cookbook/testing/integration/introduction) 
