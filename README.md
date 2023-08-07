@@ -22,6 +22,10 @@ The Flutter mobile app pipelines are a set of pipelines that are used to build a
 The pipelines are defined in the `.github/workflows/`directory in the root of this repository.
 The pipelines are run on GitHub Actions.
 
+## Limitations
+
+- Only checks last commit for screenshot keyword
+
 ## Prerequisites
 The following prerequisites are needed to run the pipelines:
 

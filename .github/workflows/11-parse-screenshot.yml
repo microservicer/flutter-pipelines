@@ -2,6 +2,8 @@ name: parse-screenshot
 
 on:
   workflow_call:
+    outputs:
+      contains_screenshot: ${{ jobs.check_commit_message.outputs.contains_screenshot }}
 
 jobs:
   check_commit_message:
