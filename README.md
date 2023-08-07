@@ -26,6 +26,7 @@ The pipelines are run on GitHub Actions.
 
 - Only checks last commit for screenshot keyword
 
+
 ## Prerequisites
 The following prerequisites are needed to run the pipelines:
 
