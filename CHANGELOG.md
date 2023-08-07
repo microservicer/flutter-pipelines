@@ -1,3 +1,18 @@
+# [0.17.0](https://github.com/microservicer/flutter-pipelines/compare/v0.16.2...v0.17.0) (2023-08-07)
+
+
+### Bug Fixes
+
+* Extra needs ([8c51e5a](https://github.com/microservicer/flutter-pipelines/commit/8c51e5a2c0a085230fc8c8a2ce4a1bb61ce9b82e))
+* Issues with workflows ([1a89de9](https://github.com/microservicer/flutter-pipelines/commit/1a89de99210238755be395e20d2e2b384ed6527a))
+* Pathing issue ([295afdf](https://github.com/microservicer/flutter-pipelines/commit/295afdf53b4d2e60f3dc07630a053266700f8be5))
+* Typo in screenshot ([389296e](https://github.com/microservicer/flutter-pipelines/commit/389296eac4b4d1d5a89e3018b0bbd72602773a01))
+
+
+### Features
+
+* Complete workflow ([fc6c932](https://github.com/microservicer/flutter-pipelines/commit/fc6c93265f90bf63a1cf525d73fac7a3cca32da9))
+
 ## [0.16.2](https://github.com/microservicer/flutter-pipelines/compare/v0.16.1...v0.16.2) (2023-08-07)
 
 
