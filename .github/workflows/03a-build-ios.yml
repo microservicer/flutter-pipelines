@@ -3,8 +3,8 @@ on:
   workflow_call:
     inputs:
       screenshot:
+        type: string
         required: true
-        type: boolean
 
 jobs:
   build-ios:
