@@ -1,3 +1,10 @@
+## [0.17.5](https://github.com/microservicer/flutter-pipelines/compare/v0.17.4...v0.17.5) (2023-08-07)
+
+
+### Bug Fixes
+
+* Add keystore to build ([015912f](https://github.com/microservicer/flutter-pipelines/commit/015912f805d6a9ebd797a57d25057ffa916f8d38))
+
 ## [0.17.4](https://github.com/microservicer/flutter-pipelines/compare/v0.17.3...v0.17.4) (2023-08-07)
 
 
