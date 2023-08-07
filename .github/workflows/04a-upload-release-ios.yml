@@ -1,0 +1,16 @@
+name: upload-release-ios
+on:
+  workflow_call:
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: ios
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: bundle exec fastlane upload_testflight
+      - run: bundle exec fastlane upload_metadata_app_store

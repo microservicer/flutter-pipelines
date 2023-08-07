@@ -36,8 +36,11 @@ platform :android do
         UI.message("Version name: #{version_name}")
         UI.message("Version code: #{version_code}")
 
-        sh("echo \"ANDROID_VERSION_NAME=#{version_name}\" >> $GITHUB_ENV")
-        sh("echo \"ANDROID_VERSION_CODE=#{version_code}\" >> $GITHUB_ENV")
+        ENV["ANDROID_VERSION_NAME"] = version_name
+        ENV["ANDROID_VERSION_CODE"] = version_code
+
+        sh("echo \"ANDROID_VERSION_NAME=#{version_name}\" >> $GITHUB_ENV") if ENV['CI']
+        sh("echo \"ANDROID_VERSION_CODE=#{version_code}\" >> $GITHUB_ENV") if ENV['CI']
     end
 
 

@@ -7,45 +7,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  build:
-    runs-on: macos-latest
-    timeout-minutes: 20
-    defaults:
-      run:
-        working-directory: ios
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - run: flutter build ios --simulator --target=integration_test/screenshot_test.dart
-      - run: flutter build apk --debug --target=integration_test/screenshot_test.dart
-      - name: Archive integration ipa
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-simulator-build
-          path: build/ios/iphonesimulator/Runner.app
-          if-no-files-found: error
-          retention-days: 3
-
-      - name: Archive integration apk
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-debug.apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
-          if-no-files-found: error
-          retention-days: 3
 
   take-screenshot-ios:
     runs-on: macos-latest

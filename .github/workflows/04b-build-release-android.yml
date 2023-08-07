@@ -66,7 +66,7 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
       - run: bundle exec fastlane versioning
-      - run: bundle exec fastlane build
+      - run: flutter build appbundle --build-number ${{ env.ANDROID_VERSION_CODE }} --build-name ${{ env.ANDROID_VERSION_NAME }} --target lib/main.dart
         env:
           FLUTTER: ${{ runner.tool_cache }}/flutter/bin/flutter
       - run: bundle exec fastlane ${{ github.event.inputs.lane || 'internal' }}
