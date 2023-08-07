@@ -6,7 +6,7 @@ on:
     types:
       - completed
 jobs:
-  release:
+  conventional-release:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -24,6 +24,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set output
+        id: output
+        run: echo new_release_published=${{ steps.semantic.outputs.new_release_published }} >> $GITHUB_OUTPUT
+    outputs:
+        new_release_published: ${{ steps.output.outputs.new_release_published }}
+
+
   screenshots:
-    if: steps.semantic.outputs.new_release_published == 'true'
+    needs:
+      - conventional-release
+    if:  ${{ needs.conventional-release.outputs.new_release_published == 'true'
     uses: ./.github/workflows/03-integration-screenshot.yml
