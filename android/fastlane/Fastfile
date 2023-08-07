@@ -18,11 +18,11 @@ default_platform(:android)
 platform :android do
 
     before_all do |lane, options|
-        json_key = ENV['PLAY_STORE_CONFIG_JSON'] ? ENV['PLAY_STORE_CONFIG_JSON'] : File.read("../key.json")
         setup_ci if ENV['CI']
     end
 
     lane :versioning do
+        json_key = ENV['PLAY_STORE_CONFIG_JSON'] ? ENV['PLAY_STORE_CONFIG_JSON'] : File.read("../key.json")
         previous_build_number = google_play_track_version_codes(
           track: "internal",
           json_key_data: json_key,
@@ -43,6 +43,7 @@ platform :android do
 
     desc "Deploy a new version to the Google Play internal track"
     lane :internal do
+        json_key = ENV['PLAY_STORE_CONFIG_JSON'] ? ENV['PLAY_STORE_CONFIG_JSON'] : File.read("../key.json")
         # If this stage fails check if there is an existing version with the same version code
         # If so, delete it from the Google Play Console or manually increment the version code to a latter value
         upload_to_play_store(
