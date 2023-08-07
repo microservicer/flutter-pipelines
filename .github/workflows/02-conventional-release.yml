@@ -5,7 +5,6 @@ on:
      new_release_published:
       description: 'If a new release was published'
       value: ${{ jobs.conventional-release.outputs.new_release_published }}
-      type: boolean
 
 jobs:
   conventional-release:

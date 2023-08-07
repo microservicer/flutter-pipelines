@@ -6,7 +6,6 @@ on:
       contains_screenshot:
         description: 'If commit message contains screenshot keyword'
         value: ${{ jobs.check_commit_message.outputs.contains_screenshot }}
-        type: boolean
 
 jobs:
   check_commit_message:
