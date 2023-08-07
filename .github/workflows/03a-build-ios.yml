@@ -1,29 +1,22 @@
-name: build
+name: build-ios
 on:
   workflow_call:
     inputs:
-      release:
+      screenshot:
         required: true
         type: boolean
-      tag:
-        required: true
-        type: string
+
 jobs:
-  build:
+  build-ios:
     runs-on: macos-latest
     timeout-minutes: 20
     defaults:
       run:
-        working-directory: ios
+          working-directory: ios
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
 
       - name: Flutter
         uses: subosito/flutter-action@v2
@@ -32,8 +25,10 @@ jobs:
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
       - run: flutter build ios --simulator --target=integration_test/screenshot_test.dart
-      - run: flutter build apk --debug --target=integration_test/screenshot_test.dart
+        if: ${{ github.event.inputs.screenshot == 'true' }}
+
       - name: Archive integration ipa
+        if: ${{ github.event.inputs.screenshot == 'true' }}
         uses: actions/upload-artifact@v3
         with:
           name: app-simulator-build
@@ -41,25 +36,30 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-      - name: Archive integration apk
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-debug.apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
-          if-no-files-found: error
-          retention-days: 3
-
+      # Build ios Release
       # Change the following key to match your secret repository choice
       - run: 'echo "$GC_KEYS" > gc_keys.json'
         shell: bash
         env:
           GC_KEYS: ${{secrets.GC_KEYS }}
+
       - run: 'echo "$API_KEY" > AuthKey.p8'
         shell: bash
         env:
           API_KEY: ${{secrets.APP_STORE_CONNECT_API_KEY }}
+
       - run: bundle install
+
       - run: bundle exec fastlane versioning
+
       - run: flutter build ios --release --config-only --no-codesign --target=lib/main.dart
-      - run: bundle exec fastlane versioning
-      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}
+
+      - run: bundle exec fastlane build
+
+      - name: Archive ipa
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.ipa
+          path: ios/Runner.ipa
+          if-no-files-found: error
+          retention-days: 3

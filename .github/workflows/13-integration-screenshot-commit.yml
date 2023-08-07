@@ -1,0 +1,35 @@
+name: integration-screenshot-commit
+on:
+  workflow_call:
+
+jobs:
+  commit-screenhots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        locale: [ 'en-US' ]
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          path: screenshots
+
+      - name: Move ios screenshots
+        run: |
+          mkdir -p ios/fastlane/screenshots/${{ matrix.locale }}
+          find ./screenshots -type f -path '*/ios-*/*' -exec cp {} ios/fastlane/screenshots/${{ matrix.locale }} \;
+
+      - name: Move android screenshots
+        run: |
+          mkdir -p android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+          find ./screenshots -type f -path '*/android-*/*' -exec cp {} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots \;
+
+      - name: Commit screenshots
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "action@github.com"
+          git add ios/fastlane/screenshots/${{ matrix.locale }} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+          git commit -m "chore: Update screenshots" -m  "[skip ci]"
+          git push

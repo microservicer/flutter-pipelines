@@ -37,7 +37,7 @@ platform :ios do
     )
   end
 
-  lane :beta do
+  lane :build do
     match(type: 'appstore', readonly: is_ci)
     build_ios_app(
         export_method: 'app-store',

@@ -1,0 +1,122 @@
+name: integration-screenshot
+on:
+  workflow_call:
+
+jobs:
+  take-screenshot-android:
+    runs-on: macos-latest
+    needs:
+      - build
+    timeout-minutes: 15
+    env:
+      API_LEVEL: 29
+      CORES: 3
+    strategy:
+      matrix:
+        model: ['pixel_6']
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
+      - name: Download app
+        uses: actions/download-artifact@v3
+        with:
+          name: app-debug.apk
+
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.API_LEVEL }}
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.API_LEVEL }}
+          profile: ${{ matrix.model }}
+          target: google_apis
+          cores: ${{ env.CORES }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: avdmanager list device
+
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.API_LEVEL }}
+          profile: ${{ matrix.model }}
+          target: google_apis
+          cores: ${{ env.CORES }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: "flutter drive --driver=test_driver/screenshot_test.dart --use-application-binary=app-debug.apk"
+
+      - name: Append model name to all files in screenshots folder
+        run: |
+          for file in screenshots/*; do
+            filename=$(basename "$file")
+            mv "$file" "screenshots/${{ matrix.model }}-$filename"
+          done
+
+
+      - name: Archive screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-screenshot-${{ matrix.model }}
+          path: screenshots
+          if-no-files-found: error
+          retention-days: 7
+
+  commit-screenhots:
+    runs-on: ubuntu-latest
+    needs:
+      - take-screenshot-android
+      - take-screenshot-ios
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        locale: [ 'en-US' ]
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          path: screenshots
+
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: screenshots
+
+      - name: Move ios screenshots
+        run: |
+          mkdir -p ios/fastlane/screenshots/${{ matrix.locale }}
+          find ./screenshots -type f -path '*/ios-*/*' -exec cp {} ios/fastlane/screenshots/${{ matrix.locale }} \;
+
+      - name: Move android screenshots
+        run: |
+          mkdir -p android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+          find ./screenshots -type f -path '*/android-*/*' -exec cp {} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots \;
+
+      - name: Commit screenshots
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "action@github.com"
+          git add ios/fastlane/screenshots/${{ matrix.locale }} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+          git commit -m "chore: Update screenshots" -m  "[skip ci]"
+          git push

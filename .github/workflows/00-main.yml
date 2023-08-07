@@ -1,0 +1,80 @@
+name: main-workflow
+on:
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  test-analyze:
+    uses: ./.github/workflows/01-test-analyze.yml
+
+  conventional-release:
+    needs:
+      - test-analyze
+    uses: ./.github/workflows/02-conventional-release.yml
+
+  parse-screeenshot:
+    uses: ./.github/workflows/11-parse-screenshot.yml
+
+  build-ios:
+    if: ${{ needs.conventional-release.outputs.new_release_published == 'true' }}
+    needs:
+      - conventional-release
+      - parse-screenshot
+    uses: ./.github/workflows/03a-build-ios.yml
+    with:
+      screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
+
+  upload-ios:
+    if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'false' }}
+    needs:
+      - parse-screenshot
+      - build-ios
+    uses: ./.github/workflows/21a-upload-release-ios.yml
+
+  build-android:
+    if: ${{ needs.conventional-release.outputs.new_release_published == 'true' }}
+    needs:
+      - conventional-release
+      - parse-screenshot
+    uses: ./.github/workflows/03b-build-android.yml
+    with:
+      screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
+
+  upload-android:
+    if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'false' }}
+    needs:
+      - parse-screenshot
+      - build-android
+    uses: ./.github/workflows/21b-upload-release-android.yml
+
+  integration-screenshot-ios:
+    if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
+    needs:
+      - parse-screenshot
+      - build-ios
+    uses: ./.github/workflows/12a-integration-screenshot-ios.yml
+
+  integration-screenshot-android:
+    if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
+    needs:
+      - parse-screenshot
+      - build-android
+    uses: ./.github/workflows/12b-integration-screenshot-android.yml
+
+  integration-screenshot-commit:
+    if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
+    needs:
+      - integration-screenshot-ios
+      - integration-screenshot-android
+    uses: ./.github/workflows/12c-integration-screenshot-commit.yml
+
+  upload-ios-screenhot:
+    needs:
+      - integration-screenshot-commit
+    uses: ./.github/workflows/21a-upload-release-ios.yml
+
+  upload-android-screenhot:
+    needs:
+      - integration-screenshot-commit
+    uses: ./.github/workflows/21b-upload-release-android.yml

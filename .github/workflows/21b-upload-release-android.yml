@@ -1,25 +1,6 @@
 name: build-release-android
 on:
-#  workflow_run:
-#    workflows: ["Generate Changelog"]
-#    branches: [main]
-#    types:
-#      - completed
-#    paths:
-#      - android/**
-#      - lib/**
-#      - '*'
-#      - .github/workflows/build-android-app.yml
-  # Enable manual run
-  workflow_dispatch:
-    inputs:
-      lane:
-        description: "Fastlane lane"
-        required: true
-        default: "internal"
-        type: choice
-        options:
-          - internal
+  workflow_call:
 
 jobs:
   build:
@@ -33,18 +14,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Flutter
-        uses: subosito/flutter-action@v2
+
+      - name: Download app
+        uses: actions/download-artifact@v3
         with:
-          cache: true
-          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
-          cache-path: "${{ runner.tool_cache }}/flutter"
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-      - run: flutter pub get
-      # - run: flutter test
+          name: app-release.aab
+          path: build/app/outputs/bundle/release/app-release.aab
+
       # Setup Ruby, Bundler, and Gemfile dependencies
       - name: Setup Fastlane
         uses: ruby/setup-ruby@v1
@@ -53,6 +29,7 @@ jobs:
           bundler-cache: true
           working-directory: android
       - run: bundle install
+
       - name: Configure Keystore
         run: |
           echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
@@ -65,8 +42,5 @@ jobs:
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
-      - run: bundle exec fastlane versioning
-      - run: flutter build appbundle --build-number ${{ env.ANDROID_VERSION_CODE }} --build-name ${{ env.ANDROID_VERSION_NAME }} --target lib/main.dart
-        env:
-          FLUTTER: ${{ runner.tool_cache }}/flutter/bin/flutter
-      - run: bundle exec fastlane ${{ github.event.inputs.lane || 'internal' }}
+
+      - run: bundle exec fastlane internal

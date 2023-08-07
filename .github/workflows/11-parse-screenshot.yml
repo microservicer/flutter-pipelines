@@ -1,0 +1,30 @@
+name: parse-screenshot
+
+on:
+  workflow_call:
+
+jobs:
+  check_commit_message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check Commit Message for 'SCREENSHOT'
+        id: check_commit
+        run: |
+          COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
+          if [[ $COMMIT_MESSAGE == *"SCREENSHOT"* ]]; then
+            echo "Contains Screenshot: true"
+            echo "contains_screenshot=true" >> $GITHUB_OUTPUT
+          else
+            echo "Contains Screenshot: false"
+            echo "contains_screenshot=false" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+    outputs:
+      contains_screenshot: ${{ steps.check_commit.outputs.contains_screenshot }}
