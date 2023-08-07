@@ -31,8 +31,10 @@ platform :android do
 
         tag = last_git_tag(pattern: "v[0-9].*")
 
-        ENV["GITHUB_ENV"]["ANDROID_VERSION_NAME"] = tag[1..-1]
-        ENV["GITHUB_ENV"]["ANDROID_VERSION_CODE"] = current_build_number.to_s
+        ENV["ANDROID_VERSION_NAME"] = tag[1..-1]
+        ENV["ANDROID_VERSION_CODE"] = current_build_number.to_s
+        UI.message("Version name: #{ENV["ANDROID_VERSION_NAME"]}")
+        UI.message("Version code: #{ENV["ANDROID_VERSION_CODE"]}")
     end
 
 

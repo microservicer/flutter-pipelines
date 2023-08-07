@@ -69,6 +69,4 @@ jobs:
       - run: bundle exec fastlane build
         env:
           FLUTTER: ${{ runner.tool_cache }}/flutter/bin/flutter
-          ANDROID_VERSION_CODE: ${{ env.ANDROID_VERSION_CODE }}
-          ANDROID_VERSION_NAME: ${{ env.ANDROID_VERSION_NAME }}
       - run: bundle exec fastlane ${{ github.event.inputs.lane || 'internal' }}
