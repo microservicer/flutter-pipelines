@@ -54,6 +54,7 @@ platform :android do
             json_key_data: json_key,
             # Change to "completed" once your app is ready to publish
             release_status: "draft",
+            timeout: 600,
         )
     end
 
