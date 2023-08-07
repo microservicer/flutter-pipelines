@@ -46,6 +46,7 @@ platform :ios do
 
   lane :upload_testflight do
     upload_to_testflight(
+        ipa: 'Runner.ipa',
         skip_waiting_for_build_processing: true,
     )
   end

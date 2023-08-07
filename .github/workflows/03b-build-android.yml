@@ -13,8 +13,6 @@ jobs:
     defaults:
       run:
           working-directory: android
-    env:
-      PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -24,6 +22,19 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
+
+      - name: Setup Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+          working-directory: android
+
+      - run: bundle install
+
+      - run: bundle exec fastlane versioning
+        env:
+          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
 
       - name: Flutter
         uses: subosito/flutter-action@v2
@@ -44,16 +55,6 @@ jobs:
           retention-days: 3
 
       # Build android Release
-      - name: Setup Fastlane
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.2"
-          bundler-cache: true
-          working-directory: android
-
-      - run: bundle install
-
-      - run: bundle exec fastlane versioning
 
       - run: flutter build appbundle --build-number ${{ env.ANDROID_VERSION_CODE }} --build-name ${{ env.ANDROID_VERSION_NAME }} --target lib/main.dart
 
