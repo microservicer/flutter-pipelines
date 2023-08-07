@@ -35,6 +35,9 @@ platform :android do
         ENV["ANDROID_VERSION_CODE"] = current_build_number.to_s
         UI.message("Version name: #{ENV["ANDROID_VERSION_NAME"]}")
         UI.message("Version code: #{ENV["ANDROID_VERSION_CODE"]}")
+
+        sh("echo \"ANDROID_VERSION_NAME=#{version_name}\" >> $GITHUB_ENV")
+        sh("echo \"ANDROID_VERSION_CODE=#{version_code}\" >> $GITHUB_ENV")
     end
 
 
