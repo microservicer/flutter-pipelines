@@ -1,3 +1,10 @@
+## [0.17.4](https://github.com/microservicer/flutter-pipelines/compare/v0.17.3...v0.17.4) (2023-08-07)
+
+
+### Bug Fixes
+
+* Some issues with builds ([fd95d07](https://github.com/microservicer/flutter-pipelines/commit/fd95d07968ecadbabaad0271ae5ddc34b78a4b1f))
+
 ## [0.17.3](https://github.com/microservicer/flutter-pipelines/compare/v0.17.2...v0.17.3) (2023-08-07)
 
 
