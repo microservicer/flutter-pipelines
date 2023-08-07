@@ -1,3 +1,12 @@
+## [0.16.2](https://github.com/microservicer/flutter-pipelines/compare/v0.16.1...v0.16.2) (2023-08-07)
+
+
+### Bug Fixes
+
+* Output variables ([5bf0824](https://github.com/microservicer/flutter-pipelines/commit/5bf08247619d69c2274eb6ab3354981136cc145a))
+* Pipeline syntax ([5aeb014](https://github.com/microservicer/flutter-pipelines/commit/5aeb0143c9496565c4bf4fb274f52fc256ac4322))
+* Unclosed section ([d9482a4](https://github.com/microservicer/flutter-pipelines/commit/d9482a4eb16f98a21823b91979e9ee9dda08f6fe))
+
 ## [0.16.1](https://github.com/microservicer/flutter-pipelines/compare/v0.16.0...v0.16.1) (2023-08-07)
 
 
