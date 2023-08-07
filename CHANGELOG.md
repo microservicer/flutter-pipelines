@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/microservicer/flutter-pipelines/compare/v0.16.0...v0.16.1) (2023-08-07)
+
+
+### Bug Fixes
+
+* Id on pipeline ([a46961a](https://github.com/microservicer/flutter-pipelines/commit/a46961ad31274e8d64447cd1d4c60f2273f47655))
+
 # [0.16.0](https://github.com/microservicer/flutter-pipelines/compare/v0.15.0...v0.16.0) (2023-08-07)
 
 
