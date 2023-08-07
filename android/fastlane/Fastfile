@@ -54,6 +54,8 @@ platform :android do
     end
 
     lane :build do
+        UI.message("Version name: #{ENV["ANDROID_VERSION_NAME"]}")
+        UI.message("Version code: #{ENV["ANDROID_VERSION_CODE"]}")
         flutter = ENV['FLUTTER']
         sh("flutter", "build", "appbundle",  "--build-number", ENV["ANDROID_VERSION_CODE"].to_s, "--build-name", ENV["ANDROID_VERSION_NAME"], "--target", "lib/main.dart")
     end
