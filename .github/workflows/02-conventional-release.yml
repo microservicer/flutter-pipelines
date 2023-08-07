@@ -34,5 +34,5 @@ jobs:
   screenshots:
     needs:
       - conventional-release
-    if:  ${{ needs.conventional-release.outputs.new_release_published == 'true'
+    if:  ${{ needs.conventional-release.outputs.new_release_published == 'true' }}
     uses: ./.github/workflows/03-integration-screenshot.yml
