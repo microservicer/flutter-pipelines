@@ -5,8 +5,6 @@ on:
 jobs:
   take-screenshot-android:
     runs-on: macos-latest
-    needs:
-      - build
     timeout-minutes: 15
     env:
       API_LEVEL: 29
