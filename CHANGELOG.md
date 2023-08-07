@@ -1,3 +1,16 @@
+# [0.16.0](https://github.com/microservicer/flutter-pipelines/compare/v0.15.0...v0.16.0) (2023-08-07)
+
+
+### Bug Fixes
+
+* Nameing issue on pipeline ([ee3ac4d](https://github.com/microservicer/flutter-pipelines/commit/ee3ac4d861cb36a2c9b767052e5e176373bb0f81))
+
+
+### Features
+
+* Fully functioning pipeline ([3585e85](https://github.com/microservicer/flutter-pipelines/commit/3585e855c984709fb4174e4dada7af7119e1b693))
+* Upload to Play store ([9019ff3](https://github.com/microservicer/flutter-pipelines/commit/9019ff397681f0f5e9718706faa6e55584e75ea7))
+
 # [0.15.0](https://github.com/microservicer/flutter-pipelines/compare/v0.14.1...v0.15.0) (2023-08-05)
 
 
