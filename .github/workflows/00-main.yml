@@ -5,9 +5,6 @@ on:
       - main
       - master
 
-env:
-  SCREENSHOT_TEXT: "SCREENSHOT"
-
 jobs:
   test-analyze:
     uses: ./.github/workflows/01-test-analyze.yml
@@ -20,7 +17,7 @@ jobs:
   parse-screenshot:
     uses: ./.github/workflows/11-parse-screenshot.yml
     with:
-      screenshot-text: ${{ env.SCREENSHOT_TEXT }}
+      screenshot-text: "SCREENSHOT"
 
   build-ios:
     if: ${{ needs.conventional-release.outputs.new_release_published == 'true' }}
