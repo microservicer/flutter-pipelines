@@ -1,3 +1,10 @@
+## [0.17.8](https://github.com/microservicer/flutter-pipelines/compare/v0.17.7...v0.17.8) (2023-08-08)
+
+
+### Bug Fixes
+
+* Change names of artifacts ([cd27320](https://github.com/microservicer/flutter-pipelines/commit/cd273208ef554c6bfbefca43d2c363c096807a56))
+
 ## [0.17.7](https://github.com/microservicer/flutter-pipelines/compare/v0.17.6...v0.17.7) (2023-08-08)
 
 
