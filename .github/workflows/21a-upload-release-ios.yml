@@ -17,7 +17,7 @@ jobs:
       - name: Download app
         uses: actions/download-artifact@v3
         with:
-          name: app-release.ipa
+          name: app-release
           path: ios/Runner.ipa
 
       - run: 'echo "$API_KEY" > AuthKey.p8'

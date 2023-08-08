@@ -59,7 +59,7 @@ jobs:
       - name: Archive ipa
         uses: actions/upload-artifact@v3
         with:
-          name: app-release.ipa
+          name: app-release
           path: ios/Runner.ipa
           if-no-files-found: error
           retention-days: 3
