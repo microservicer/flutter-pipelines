@@ -2,6 +2,11 @@ name: parse-screenshot
 
 on:
   workflow_call:
+    inputs:
+      screenshot-text:
+        description: 'Text to search for in commit message'
+        required: true
+        type: string
     outputs:
       contains_screenshot:
         description: 'If commit message contains screenshot keyword'
@@ -17,11 +22,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check Commit Message for 'SCREENSHOT'
+      - name: Check Commit Message for '${{ github.event.inputs.screenshot-text }}'
         id: check_commit
         run: |
           COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
-          if [[ $COMMIT_MESSAGE == *"SCREENSHOT"* ]]; then
+          if [[ $COMMIT_MESSAGE == *"${{ github.event.inputs.screenshot-text }}"* ]]; then
             echo "Contains Screenshot: true"
             echo "contains_screenshot=true" >> $GITHUB_OUTPUT
           else
