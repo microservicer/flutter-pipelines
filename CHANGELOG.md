@@ -1,3 +1,11 @@
+# [0.18.0](https://github.com/microservicer/flutter-pipelines/compare/v0.17.8...v0.18.0) (2023-08-08)
+
+
+### Features
+
+* Add new screen for additional screenshot ([a2e50a5](https://github.com/microservicer/flutter-pipelines/commit/a2e50a58637ed9c5201d00840b125ac05e1f30c4))
+* Add new screen for additional screenshot ([19bf6d0](https://github.com/microservicer/flutter-pipelines/commit/19bf6d0cee67bd447e5dcc5f6fa89477fbcb0469))
+
 ## [0.17.8](https://github.com/microservicer/flutter-pipelines/compare/v0.17.7...v0.17.8) (2023-08-08)
 
 
