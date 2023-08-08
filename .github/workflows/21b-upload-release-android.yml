@@ -16,8 +16,8 @@ jobs:
       - name: Download app
         uses: actions/download-artifact@v3
         with:
-          name: app-release
-          path: build/app/outputs/bundle/release/app-release.aab
+          name: app-release.aab
+          path: build/app/outputs/bundle/release/
 
       # Setup Ruby, Bundler, and Gemfile dependencies
       - name: Setup Fastlane

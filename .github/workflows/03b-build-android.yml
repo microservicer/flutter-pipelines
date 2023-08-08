@@ -74,7 +74,7 @@ jobs:
       - name: Archive appbundle
         uses: actions/upload-artifact@v3
         with:
-          name: app-release
+          name: app-release.aab
           path: build/app/outputs/bundle/release/app-release.aab
           if-no-files-found: error
           retention-days: 3
