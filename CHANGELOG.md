@@ -1,3 +1,10 @@
+## [0.17.7](https://github.com/microservicer/flutter-pipelines/compare/v0.17.6...v0.17.7) (2023-08-08)
+
+
+### Bug Fixes
+
+* Endings on builds ([b129dbc](https://github.com/microservicer/flutter-pipelines/commit/b129dbc80532f19fe14d0c63ed203d326c9e2666))
+
 ## [0.17.6](https://github.com/microservicer/flutter-pipelines/compare/v0.17.5...v0.17.6) (2023-08-07)
 
 
