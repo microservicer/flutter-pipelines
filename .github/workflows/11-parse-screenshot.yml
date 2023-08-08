@@ -22,11 +22,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check Commit Message for '${{ github.event.inputs.screenshot-text }}'
+      - name: Check Commit Message for '${{ inputs.screenshot-text }}'
         id: check_commit
         run: |
           COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
-          if [[ $COMMIT_MESSAGE == *"${{ github.event.inputs.screenshot-text }}"* ]]; then
+          if [[ $COMMIT_MESSAGE == *"${{ inputs.screenshot-text }}"* ]]; then
             echo "Contains Screenshot: true"
             echo "contains_screenshot=true" >> $GITHUB_OUTPUT
           else

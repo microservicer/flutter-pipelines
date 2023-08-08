@@ -40,10 +40,10 @@ jobs:
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
       - run: flutter build ios --simulator --target=integration_test/screenshot_test.dart
-        if: ${{ github.event.inputs.screenshot == 'true' }}
+        if: ${{ inputs.screenshot == 'true' }}
 
       - name: Archive integration ipa
-        if: ${{ github.event.inputs.screenshot == 'true' }}
+        if: ${{ inputs.screenshot == 'true' }}
         uses: actions/upload-artifact@v3
         with:
           name: app-simulator-build
