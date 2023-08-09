@@ -1,7 +1,13 @@
 name: integration-screenshot-commit
 on:
   workflow_call:
-
+    inputs:
+      android:
+        required: true
+        type: boolean
+      ios:
+        required: true
+        type: boolean
 jobs:
   commit-screenhots:
     runs-on: ubuntu-latest
@@ -17,11 +23,13 @@ jobs:
           path: screenshots
 
       - name: Move ios screenshots
+        if: ${{ inputs.ios == 'true' }}
         run: |
           mkdir -p ios/fastlane/screenshots/${{ matrix.locale }}
           find ./screenshots -type f -path '*/ios-*/*' -exec cp {} ios/fastlane/screenshots/${{ matrix.locale }} \;
 
       - name: Move android screenshots
+        if: ${{ inputs.android == 'true' }}
         run: |
           mkdir -p android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
           find ./screenshots -type f -path '*/android-*/*' -exec cp {} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots \;

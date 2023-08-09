@@ -17,6 +17,7 @@ jobs:
   parse-screenshot:
     uses: ./.github/workflows/11-parse-screenshot.yml
     with:
+      # Set to empty string to always take screenshots
       screenshot-text: "SCREENSHOT"
 
   build-ios:
@@ -27,6 +28,7 @@ jobs:
     uses: ./.github/workflows/03a-build-ios.yml
     with:
       screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
+      ipa: true
     secrets: inherit
 
   upload-ios:
@@ -45,6 +47,7 @@ jobs:
     uses: ./.github/workflows/03b-build-android.yml
     with:
       screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
+      apk: true
     secrets: inherit
 
   upload-android:
@@ -61,6 +64,9 @@ jobs:
       - parse-screenshot
       - build-ios
     uses: ./.github/workflows/12a-integration-screenshot-ios.yml
+    with:
+      #model: ['iPhone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
+      model: "['iPhone SE (3rd generation)']"
 
   integration-screenshot-android:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
@@ -68,6 +74,9 @@ jobs:
       - parse-screenshot
       - build-android
     uses: ./.github/workflows/12b-integration-screenshot-android.yml
+    with:
+      api_level: 30
+      model: "['pixel_6']"
 
   integration-screenshot-commit:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
@@ -75,6 +84,9 @@ jobs:
       - integration-screenshot-ios
       - integration-screenshot-android
     uses: ./.github/workflows/13-integration-screenshot-commit.yml
+    with:
+      android: true
+      ios: true
 
   upload-ios-screenhot:
     needs:

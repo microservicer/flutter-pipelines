@@ -1,17 +1,26 @@
 name: integration-screenshot-android
 on:
   workflow_call:
+    inputs:
+      api_level:
+        description: 'Android API level'
+        required: true
+        type: number
+      model:
+        description: 'Android device model id'
+        required: true
+        type: string
 
 jobs:
   take-screenshot-android:
     runs-on: macos-latest
     timeout-minutes: 15
     env:
-      API_LEVEL: 29
+      API_LEVEL: ${{ inputs.api_level }}
       CORES: 3
     strategy:
       matrix:
-        model: ['pixel_6']
+        model: ${{ fromJson(inputs.model) }}
     steps:
       - name: checkout
         uses: actions/checkout@v3

@@ -1,6 +1,10 @@
 name: integration-screenshot-ios
 on:
   workflow_call:
+    inputs:
+      model:
+        required: true
+        type: string
 
 jobs:
   take-screenshot-ios:
@@ -8,8 +12,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       matrix:
-        #model: ['iPhone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
-        model: ['iPhone SE (3rd generation)']
+        model: ${{ fromJson(inputs.model) }}
     steps:
       - uses: actions/checkout@v3
         with:
