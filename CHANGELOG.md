@@ -1,3 +1,10 @@
+# [0.20.0](https://github.com/microservicer/flutter-pipelines/compare/v0.19.0...v0.20.0) (2023-08-09)
+
+
+### Features
+
+* Add input variables to all builds ([b7ac695](https://github.com/microservicer/flutter-pipelines/commit/b7ac69540acdb9a93a5b08663f4b70135b7f5d49))
+
 # [0.19.0](https://github.com/microservicer/flutter-pipelines/compare/v0.18.0...v0.19.0) (2023-08-08)
 
 
