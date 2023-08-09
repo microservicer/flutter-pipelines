@@ -7,17 +7,19 @@ on:
         required: true
       apk:
         description: 'Run APK build'
-        type: boolean
+        type: string
         required: true
   workflow_dispatch:
     inputs:
       screenshot:
         description: 'Run screenshot build'
-        type: boolean
+        type: choice
+        options:  ['true', 'false']
         required: true
       apk:
         description: 'Run APK build'
-        type: boolean
+        type: choice
+        options:  ['true', 'false']
         required: true
 
 jobs:

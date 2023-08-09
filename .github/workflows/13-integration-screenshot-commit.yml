@@ -4,10 +4,10 @@ on:
     inputs:
       android:
         required: true
-        type: boolean
+        type: string
       ios:
         required: true
-        type: boolean
+        type: string
 jobs:
   commit-screenhots:
     runs-on: ubuntu-latest

@@ -28,7 +28,7 @@ jobs:
     uses: ./.github/workflows/03a-build-ios.yml
     with:
       screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
-      ipa: true
+      ipa: "true"
     secrets: inherit
 
   upload-ios:
@@ -47,7 +47,7 @@ jobs:
     uses: ./.github/workflows/03b-build-android.yml
     with:
       screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
-      apk: true
+      apk: "true"
     secrets: inherit
 
   upload-android:
@@ -85,8 +85,8 @@ jobs:
       - integration-screenshot-android
     uses: ./.github/workflows/13-integration-screenshot-commit.yml
     with:
-      android: true
-      ios: true
+      android: "true"
+      ios: "true"
 
   upload-ios-screenhot:
     needs:

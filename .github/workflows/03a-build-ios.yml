@@ -3,21 +3,23 @@ on:
   workflow_call:
     inputs:
       screenshot:
-        type: boolean
+        type: string
         required: true
       ipa:
         description: 'Run IPA build'
-        type: boolean
+        type: string
         required: true
   workflow_dispatch:
     inputs:
       screenshot:
         description: 'Run screenshot build'
-        type: boolean
+        type: choice
+        options:  ['true', 'false']
         required: true
       ipa:
         description: 'Run IPA build'
-        type: boolean
+        type: choice
+        options:  ['true', 'false']
         required: true
 
 
