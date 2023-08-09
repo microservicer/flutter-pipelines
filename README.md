@@ -1,5 +1,5 @@
-
 # Flutter Mobile App Pipelines Infrastructure
+
 <p>
   <a href="https://github.com/microservicer/flutter-pipelines/actions?query=workflow%3Abuild-ios-app+branch%3Amaster">
     <img alt="Build states" src="https://github.com/semantic-release/semantic-release/workflows/Test/badge.svg">
@@ -7,15 +7,12 @@
   <a href="https://github.com/semantic-release/semantic-release">
     <img alt="semantic-release: angular" src="https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release">
   </a>
-<a target="_blank" href="https://app.eraser.io/workspace/ajpbJwx0o7yCsztjRfkP" id="edit-in-eraser-github-link"><img alt="Edit in Eraser" src="https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fgithub%2FOpen%20in%20Eraser.svg?alt=media&amp;token=968381c8-a7e7-472a-8ed6-4a6626da5501"></a>
 </p>
 This repository contains the infrastructure code for deploying a Flutter mobile app to the Play Store and App Store.
 
 It is an opinionated setup that is focused on using a native Flutter approach to building and deploying the app.
 It is also focused on GitOps so that all changes are tracked within this repository.
 The only exception is the Fastlane Match certificates and profiles that are stored in a separate repository, depending on your setup.
-
-![Figure 1](/.eraser/ajpbJwx0o7yCsztjRfkP___mWf9ulN3fVP9AukUG2H0RF9fwjq2___---figure---heXFJj3ZPRNXhZZvlZQqU---figure---Gv7OlimrLwsL1zx31Bjlsw.png "Figure 1")
 
 ## Overview
 The Flutter mobile app pipelines are a set of pipelines that are used to build and test the Flutter mobile app.
@@ -90,12 +87,12 @@ these are billed with 10x the price of a normal build.
 ### Setup iOS
 The following steps will help you run the `build-ios-app.yml` pipeline.
 
-Create a new App Store app in the [﻿App Store Connect website](https://appstoreconnect.apple.com/).
+Create a new App Store app in the [App Store Connect website](https://appstoreconnect.apple.com/).
 
 #### API Keys
 Generate a new App Store API key for the iOS app and store it in the GitHub repository secrets.
 
-- At the [﻿App Store Connect website](https://appstoreconnect.apple.com/access/api) , go to `Users and Access`  and create a new API key.
+- At the [App Store Connect website](https://appstoreconnect.apple.com/access/api) , go to `Users and Access`  and create a new API key.
 - Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
 - name: `APP_STORE_CONNECT_API_KEY` 
 If you want to run locally you need to store the API key in a file called AuthKey.p8 in the `ios` directory.
@@ -106,7 +103,7 @@ Make sure to update the `Appfile` file in the `ios/fastlane` directory.
 
 - `Appfile`  - This file contains the app identifier and the Apple ID of the developer account.
 #### Fastlane Match
-The iOS app uses [﻿fastlane match](https://docs.fastlane.tools/actions/match/) to manage the certificates and profiles.
+The iOS app uses [fastlane match](https://docs.fastlane.tools/actions/match/) to manage the certificates and profiles.
 To initialize the match repo, run the following command in the `ios` directory:
 
 ```bash
@@ -160,12 +157,12 @@ flutter build ios --release --no-codesign --config-only
 bundle exec fastlane ios beta
 ```
 ## Android
-Create a new app in the [﻿Google Play Console](https://play.google.com/apps/publish/).
+Create a new app in the [Google Play Console](https://play.google.com/apps/publish/).
 
 ### API Keys
 Create an API key for the Google Play Store.
 
-- At the [﻿Google Play Console](https://play.google.com/apps/publish/)  go to `Setup`  and `API access`  and create a new API key.
+- At the [Google Play Console](https://play.google.com/apps/publish/)  go to `Setup`  and `API access`  and create a new API key.
 - Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
 - name: `PLAY_STORE_CONFIG_JSON` 
 ### Setup Android Manually
@@ -207,7 +204,7 @@ Make sure to update the `metadata/android/` directory with the correct metadata 
 ### Upload key
 Generate a new upload key for the Android app and store it in the GitHub repository secrets.
 
-- Follow the steps in the [﻿Android documentation](https://developer.android.com/studio/publish/app-signing#generate-key)  to generate a new upload key.
+- Follow the steps in the [Android documentation](https://developer.android.com/studio/publish/app-signing#generate-key)  to generate a new upload key.
     - Save the settings in the `android/key.properties`  file.
         - `storePassword` 
         - `keyPassword` 
@@ -235,7 +232,7 @@ To build the Android app locally, run the following command in the root of your 
 ```bash
 flutter build appbundle --release
 ```
-[﻿Google Play Console](https://play.google.com/apps/publish/). > Your app > Testing > Internal Testing and "Choose signing key"
+[Google Play Console](https://play.google.com/apps/publish/). > Your app > Testing > Internal Testing and "Choose signing key"
 and select "Use Google-generated key".
 
 Then upload the app bundle to the Play Store.
@@ -261,15 +258,12 @@ bundle exec fastlane android internal
   This means that you missed to upload the keystore to GitHub secrets. Remember to base64 encode it first!
 
 ## Resources
-- [﻿Guide](https://keyholesoftware.com/2023/02/13/automating-flutter-deployments-part-2-screenshots/)  on how to set up screenshots for the App Store and Play Store
-- [﻿Flutter Integration Test](https://flutter.dev/docs/cookbook/testing/integration/introduction) 
-- [﻿Flutter Integration Test Repo](https://github.com/flutter/flutter/blob/master/packages/integration_test/README.md) 
-- [﻿emulator](https://pub.dev/packages/emulators) 
-- [﻿iOS screenshot sizes](https://appradar.com/blog/ios-app-screenshot-sizes-and-guidelines-for-the-apple-app-store) 
-- [﻿iOS emulator Action](https://github.com/marketplace/actions/launch-ios-simulator) 
-- [﻿Android emulator Action](https://github.com/marketplace/actions/android-emulator-runner) 
-- [﻿PR linter](https://github.com/amannn/action-semantic-pull-request) 
+- [Guide](https://keyholesoftware.com/2023/02/13/automating-flutter-deployments-part-2-screenshots/)  on how to set up screenshots for the App Store and Play Store
+- [Flutter Integration Test](https://flutter.dev/docs/cookbook/testing/integration/introduction) 
+- [Flutter Integration Test Repo](https://github.com/flutter/flutter/blob/master/packages/integration_test/README.md) 
+- [emulator](https://pub.dev/packages/emulators) 
+- [iOS screenshot sizes](https://appradar.com/blog/ios-app-screenshot-sizes-and-guidelines-for-the-apple-app-store) 
+- [iOS emulator Action](https://github.com/marketplace/actions/launch-ios-simulator) 
+- [Android emulator Action](https://github.com/marketplace/actions/android-emulator-runner) 
+- [PR linter](https://github.com/amannn/action-semantic-pull-request) 
 
-
-
-<!--- Eraser file: https://app.eraser.io/workspace/ajpbJwx0o7yCsztjRfkP --->
