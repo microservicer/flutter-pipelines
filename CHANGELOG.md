@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/microservicer/flutter-pipelines/compare/v0.20.0...v0.20.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* Test run ([739b621](https://github.com/microservicer/flutter-pipelines/commit/739b62127c610759525e7f7875191922ab8f82c0))
+
 # [0.20.0](https://github.com/microservicer/flutter-pipelines/compare/v0.19.0...v0.20.0) (2023-08-09)
 
 
