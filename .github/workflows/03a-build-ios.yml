@@ -6,6 +6,7 @@ on:
         type: boolean
         required: true
       ipa:
+        description: 'Run IPA build'
         type: boolean
         required: true
   workflow_dispatch:
