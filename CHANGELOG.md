@@ -1,3 +1,10 @@
+## [0.20.2](https://github.com/microservicer/flutter-pipelines/compare/v0.20.1...v0.20.2) (2023-08-09)
+
+
+### Bug Fixes
+
+* GH actions not parsing boolean correctly ([1e32798](https://github.com/microservicer/flutter-pipelines/commit/1e327982a4992cf42cc62e1be4373637ff9cac71))
+
 ## [0.20.1](https://github.com/microservicer/flutter-pipelines/compare/v0.20.0...v0.20.1) (2023-08-09)
 
 
