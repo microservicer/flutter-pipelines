@@ -30,19 +30,12 @@ The following prerequisites are needed to run the pipelines:
 - A GitHub repository
 - A Google Play Store account (for ios builds)
 - An Apple Developer account (for android builds)
+- 
 ## Pipelines
-The following pipelines are defined in this repository:
 
-- `conventional-releases.yml`  - This pipeline is triggered when a new commit is pushed to the `master`  branch.
-It runs the `conventional-releases`  action to generate a new GitHub release for the Flutter mobile app.
-- `build-android-app.yml`  - This pipeline can be configured to be triggered when the conventional-releases pipeline completes.
-You can achieve this by uncommenting the code in the top of the file.
-It builds the Flutter mobile app for Android and uploads the Appbundle to the Play Store. It is only set to manual run.
-- `build-ios-app.yml`  - This pipeline can be configured to be triggered when the conventional-releases pipeline completes.
-You can achieve this by uncommenting the code in the top of the file.
-It builds the Flutter mobile app for iOS and uploads the IPA to the App Store. It is only set to manual run.
+
 ## Setup
-To get started copy the content of this project to your Flutter project.
+
 
 ### Flutter
 Get the latest dependencies by running the following command in the root of your Flutter project:
