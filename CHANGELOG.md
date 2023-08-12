@@ -1,3 +1,10 @@
+## [0.21.2](https://github.com/microservicer/flutter-pipelines/compare/v0.21.1...v0.21.2) (2023-08-12)
+
+
+### Bug Fixes
+
+* Pull before pushing screenshots ([f7e85d5](https://github.com/microservicer/flutter-pipelines/commit/f7e85d53bf39843038fa06d5447df31fc3ae5fcc))
+
 ## [0.21.1](https://github.com/microservicer/flutter-pipelines/compare/v0.21.0...v0.21.1) (2023-08-12)
 
 
