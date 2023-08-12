@@ -1,0 +1,34 @@
+name: integration-screenshot-commit-ios
+on:
+  workflow_call:
+    inputs:
+      locale:
+        required: true
+        type: string
+jobs:
+  commit-screenhots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        locale: ${{ fromJson(inputs.locale) }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          path: screenshots
+
+      - name: Move ios screenshots
+        if: ${{ inputs.ios == 'true' }}
+        run: |
+          mkdir -p ios/fastlane/screenshots/${{ matrix.locale }}
+          find ./screenshots -type f -path '*/ios-*/*' -exec cp {} ios/fastlane/screenshots/${{ matrix.locale }} \;
+
+      - name: Commit screenshots
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "action@github.com"
+          git add ios/fastlane/screenshots/${{ matrix.locale }}
+          git commit -m "chore: Update screenshots iOS" -m  "[skip ci]"
+          git push

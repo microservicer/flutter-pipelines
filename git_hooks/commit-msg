@@ -50,7 +50,8 @@ while read -r line; do
 done <<< "$body"
 
 # Rule 6: Separate subject from body with a blank line
-if [[ -n $body ]] && [[ ! $message =~ ^.*\n\n.*$ ]]; then
+second_line=$(echo "$message" | sed -n '2p')
+if [[ -n $body ]] && [[ -n $second_line ]]; then
     echo "ERROR: Commit message body should be separated from the subject with a blank line"
     exit 1
 fi

@@ -78,24 +78,32 @@ jobs:
       api_level: 30
       model: "['pixel_6']"
 
-  integration-screenshot-commit:
+  integration-screenshot-commit-ios:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
     needs:
       - integration-screenshot-ios
+    uses: ./.github/workflows/13-integration-screenshot-commit.yml
+    with:
+      locale: "['en-US']"
+    secrets: inherit
+
+  integration-screenshot-commit-android:
+    if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
+    needs:
       - integration-screenshot-android
     uses: ./.github/workflows/13-integration-screenshot-commit.yml
     with:
-      android: "true"
-      ios: "true"
+      locale: "['en-US']"
+    secrets: inherit
 
   upload-ios-screenhot:
     needs:
-      - integration-screenshot-commit
+      - integration-screenshot-commit-ios
     uses: ./.github/workflows/21a-upload-release-ios.yml
     secrets: inherit
 
   upload-android-screenhot:
     needs:
-      - integration-screenshot-commit
+      - integration-screenshot-commit-android
     uses: ./.github/workflows/21b-upload-release-android.yml
     secrets: inherit

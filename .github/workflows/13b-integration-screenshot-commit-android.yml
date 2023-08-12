@@ -1,11 +1,8 @@
-name: integration-screenshot-commit
+name: integration-screenshot-commit-android
 on:
   workflow_call:
     inputs:
-      android:
-        required: true
-        type: string
-      ios:
+      locale:
         required: true
         type: string
 jobs:
@@ -14,19 +11,13 @@ jobs:
     timeout-minutes: 5
     strategy:
       matrix:
-        locale: [ 'en-US' ]
+        locale: ${{ fromJson(inputs.locale) }}
     steps:
       - uses: actions/checkout@v3
 
       - uses: actions/download-artifact@v3
         with:
           path: screenshots
-
-      - name: Move ios screenshots
-        if: ${{ inputs.ios == 'true' }}
-        run: |
-          mkdir -p ios/fastlane/screenshots/${{ matrix.locale }}
-          find ./screenshots -type f -path '*/ios-*/*' -exec cp {} ios/fastlane/screenshots/${{ matrix.locale }} \;
 
       - name: Move android screenshots
         if: ${{ inputs.android == 'true' }}
@@ -38,6 +29,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "action@github.com"
-          git add ios/fastlane/screenshots/${{ matrix.locale }} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
-          git commit -m "chore: Update screenshots" -m  "[skip ci]"
+          git add android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+          git commit -m "chore: Update screenshots android" -m  "[skip ci]"
           git push

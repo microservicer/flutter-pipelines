@@ -1,7 +1,7 @@
 # Flutter Mobile App Pipelines Infrastructure
 
 <p>
-  <a href="https://github.com/microservicer/flutter-pipelines/actions?query=workflow%3Abuild-ios-app+branch%3Amaster">
+  <a href="https://github.com/microservicer/flutter-pipelines/actions?query=workflow%3Amain-workflow+branch%3Amaster">
     <img alt="Build states" src="https://github.com/semantic-release/semantic-release/workflows/Test/badge.svg">
   </a>
   <a href="https://github.com/semantic-release/semantic-release">
@@ -25,17 +25,16 @@ The pipelines are run on GitHub Actions.
 
 
 ## Prerequisites
-The following prerequisites are needed to run the pipelines:
+The following prerequisites are needed to install and run the pipelines:
 
-- A GitHub repository
-- A Google Play Store account (for ios builds)
-- An Apple Developer account (for android builds)
-- 
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- [Fastlane](https://docs.fastlane.tools/)
+- [A GitHub repository](https://github.com/)
+- [A Google Play Store account](https://play.google.com/console/u/0/developers) (for android builds)
+- [An Apple Developer account](https://appstoreconnect.apple.com/) (for ios builds)
+
+
 ## Pipelines
-
-
-## Setup
-
 
 ### Flutter
 Get the latest dependencies by running the following command in the root of your Flutter project:
@@ -47,6 +46,12 @@ flutter pub get
 To rename the package name of your Flutter app, run the following command in the root of your Flutter project:
 Change the `com.example.new_package_name` to the package name you want to use.
 Change the `My New App Name` to the name you want to use for your app.
+
+
+## Setup in existing app
+
+
+
 
 ```bash
 flutter pub global activate rename
