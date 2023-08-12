@@ -20,7 +20,6 @@ jobs:
           path: screenshots
 
       - name: Move android screenshots
-        if: ${{ inputs.android == 'true' }}
         run: |
           mkdir -p android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
           find ./screenshots -type f -path '*/android-*/*' -exec cp {} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots \;
