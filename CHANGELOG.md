@@ -1,3 +1,10 @@
+## [0.21.1](https://github.com/microservicer/flutter-pipelines/compare/v0.21.0...v0.21.1) (2023-08-12)
+
+
+### Bug Fixes
+
+* Remove unused check ([4cfedd1](https://github.com/microservicer/flutter-pipelines/commit/4cfedd18aafaac1ec850f8df611dc3a8b7472079))
+
 # [0.21.0](https://github.com/microservicer/flutter-pipelines/compare/v0.20.2...v0.21.0) (2023-08-12)
 
 
