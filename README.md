@@ -26,6 +26,8 @@ The pipelines are run on GitHub Actions.
 
 ## Limitations
 
+- Builds can be flaky due to problems with running emulators.
+Tight timeouts has been added to the pipelines to reduce the risk of stuck jobs spending credits.
 - Only checks last commit for screenshot keyword
 
 
@@ -56,6 +58,16 @@ If you are interested in using this project as a template for an existing Flutte
 
 Fork this repository to your own GitHub account. Or download the repository as a zip file.
 
+### Clean up the repository
+
+Run the following script to clean up the repository of files that need to be configured for your app:
+
+```bash
+./scripts/clean_up.sh
+```
+
+> This will rename this README.md file to README.md.old.
+
 ### Flutter
 Get the latest dependencies by running the following command in the root of your Flutter project:
 
@@ -77,12 +89,13 @@ Make sure that all the files in the `android/app/src/main/kotlin/com/example/`
 directory are moved to the new package name directory and this is added to git.
 
 ### Git Hooks
-We use Git hooks to enforce commit message formatting and automatically update our release notes.
+You can use Git hooks to enforce commit message formatting to reduce the number of failed builds.
 To install these hooks, run the following command after you clone the repository:
 
 ```bash
-./install_hooks.sh
+./scripts/install_hooks.sh
 ```
+
 ### Bundler
 Make sure you have Ruby installed on your machine.
 
@@ -94,12 +107,13 @@ Install the bundler gem:
 ```bash
 gem install bundler
 ```
+
 ## iOS
 >  iOS builds are very expensive to run since they required a Mac to run on.
 these are billed with 10x the price of a normal build. 
 
 ### Setup iOS
-The following steps will help you run the `build-ios-app.yml` pipeline.
+The following steps will help you run the iOS part of the pipeline.
 
 Create a new App Store app in the [App Store Connect website](https://appstoreconnect.apple.com/).
 
@@ -109,13 +123,23 @@ Generate a new App Store API key for the iOS app and store it in the GitHub repo
 - At the [App Store Connect website](https://appstoreconnect.apple.com/access/api) , go to `Users and Access`  and create a new API key.
 - Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
 - name: `APP_STORE_CONNECT_API_KEY` 
+
 If you want to run locally you need to store the API key in a file called AuthKey.p8 in the `ios` directory.
 Remember to add the file to the `.gitignore` file.
 
 #### Fastlane
-Make sure to update the `Appfile` file in the `ios/fastlane` directory.
+Make sure to update/create the `Appfile` file in the `ios/fastlane` directory.
 
 - `Appfile`  - This file contains the app identifier and the Apple ID of the developer account.
+It should have the following content:
+
+```ruby
+app_identifier("my.bundle.id") # The bundle identifier of your app
+apple_id("machine@myorg.org") # Your Apple email address
+itc_team_id("123456789") # App Store Connect Team ID
+team_id("SAZY5AB444") # Developer Portal Team ID
+```
+
 #### Fastlane Match
 The iOS app uses [fastlane match](https://docs.fastlane.tools/actions/match/) to manage the certificates and profiles.
 To initialize the match repo, run the following command in the `ios` directory:
@@ -124,40 +148,25 @@ To initialize the match repo, run the following command in the `ios` directory:
 bundle exec fastlane match init
 ```
 After following the steps make sure to store the secret(s) in the GitHub repository secrets.
-To be accessed by the `build-ios-app.yml` pipeline.
+
+If you have chosen to use Google Cloud Storage the secret is:
+- GC_KEYS - The key to the Google Cloud Storage bucket.
+
+To be accessed by the `03a-build-ios.yml` pipeline. Have you chosen another approach than Google Cloud Storage,
+you will need to edit the `03a-build-ios.yml` file.
+See the [Fastlane Match documentation](https://docs.fastlane.tools/actions/match/) for more information.
 
 Then run the following command to create the certificates and profiles:
 
 ```bash
-bundle exec fastlane certs
+bundle exec fastlane register
 ```
 Make sure that you have itc_team_id and team_id in the `Appfile` file in the `ios/fastlane` directory.
 
 Then open Xcode and go to `target` > `Signing & Capabilities` and make sure that the Match certificates and profiles are selected.
 
-#### PodFile
-Add the line under the comment to your Podfile to reduce building time. Make sure to update the version tag from time to time.
-This will get you the fastest build time possible.
-
-```ruby
-target 'Runner' do
-  use_frameworks!
-  use_modular_headers!
-
-  # Add this row to your Podfile to reduce building time
-  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.10.0'
-  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
-end
-```
-### Setting up a development profile
-To set up a development profile for the iOS app, run the following command in the `ios` directory:
-
-```bash
-bundle exec fastlane certs
-```
-If needed, add your device to the `devices.txt` file in the `ios/fastlane` directory.
-
 ### Running iOS build locally
+
 To run the iOS build locally you need to have a Mac with Xcode installed.
 
 You also need to make sure that you have the API key stored in a file called `AuthKey.p8` in the `ios` directory.
@@ -168,8 +177,10 @@ Then run the following command in the `ios` directory:
 
 ```bash
 flutter build ios --release --no-codesign --config-only
-bundle exec fastlane ios beta
+bundle exec fastlane versioning
+bundle exec fastlane build
 ```
+
 ## Android
 Create a new app in the [Google Play Console](https://play.google.com/apps/publish/).
 
@@ -179,38 +190,15 @@ Create an API key for the Google Play Store.
 - At the [Google Play Console](https://play.google.com/apps/publish/)  go to `Setup`  and `API access`  and create a new API key.
 - Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
 - name: `PLAY_STORE_CONFIG_JSON` 
-### Setup Android Manually
-The following steps will help you run the `build-android-app.yml` pipeline if you only copied the files from this repository.
 
-You will need to replace the following classes in your build.gradle file:
-
-```groovy
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-
-android {
-    ...
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['storePassword']
-        }
-    }
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
-    ...
-}
-```
 ### Fastlane
-Make sure to update the `Appfile` file in the `android/fastlane` directory.
+Make sure to update/create the `Appfile` file in the `android/fastlane` directory.
+
+It should have the following content:
+
+```ruby
+package_name("my.package.name")
+```
 
 ### Metadata
 Make sure to update the `metadata/android/` directory with the correct metadata for the app.
@@ -253,20 +241,54 @@ Then upload the app bundle to the Play Store.
 
 - Create release > Upload your app bundle. 
 - You can find the app bundle in the `build/app/outputs/bundle/release/app-release.aab`  directory.
-### Running Android pipeline build locally
+
+### Running Android build locally
 Make sure you have the following:
 
 - `key.properties`  in your `android`  directory. 
 - your upload key in the `android/app`  directory.
 - the API key stored in the `PLAY_STORE_CONFIG_JSON`  env or in a file called `key.json`  in the `android`  directory.
 - Export your flutter project path `bash export FLUTTER=$FLUTTER_PATH`  where `$FLUTTER_PATH`  is the path to your flutter installation.
+
 Then run the following command in the `android` directory:
 
 ```bash
-bundle exec fastlane android internal
+bundle exec fastlane versioning
+bundle exec fastlane build
 ```
 
 ## Copy files to existing project
+
+### Setup Android Manually
+The following steps will help you run the `03b-build-android.yml` pipeline if you only copied the files from this repository.
+
+You will need to replace the following classes in your build.gradle file:
+
+```groovy
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    ...
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+    ...
+}
+```
 
 ## Common errors:
 
