@@ -82,7 +82,7 @@ jobs:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
     needs:
       - integration-screenshot-ios
-    uses: ./.github/workflows/13-integration-screenshot-commit.yml
+    uses: ./.github/workflows/13a-integration-screenshot-commit-ios.yml
     with:
       locale: "['en-US']"
     secrets: inherit
@@ -91,7 +91,7 @@ jobs:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}
     needs:
       - integration-screenshot-android
-    uses: ./.github/workflows/13-integration-screenshot-commit.yml
+    uses: ./.github/workflows/13b-integration-screenshot-commit-android.yml
     with:
       locale: "['en-US']"
     secrets: inherit
