@@ -1,3 +1,11 @@
+# [0.21.0](https://github.com/microservicer/flutter-pipelines/compare/v0.20.2...v0.21.0) (2023-08-12)
+
+
+### Features
+
+* Split out commits to separate jobs ([e151dd1](https://github.com/microservicer/flutter-pipelines/commit/e151dd1d091ca58a9f3c61b06a4afbee34c496f7))
+* Split out commits to separate jobs ([8e506c7](https://github.com/microservicer/flutter-pipelines/commit/8e506c7e9115ccf29d868aa1a8d1b3336a40e666))
+
 ## [0.20.2](https://github.com/microservicer/flutter-pipelines/compare/v0.20.1...v0.20.2) (2023-08-09)
 
 
