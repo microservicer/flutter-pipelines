@@ -1,3 +1,10 @@
+## [0.21.3](https://github.com/microservicer/flutter-pipelines/compare/v0.21.2...v0.21.3) (2023-08-12)
+
+
+### Bug Fixes
+
+* Rebase before pushing screenshots ([616c213](https://github.com/microservicer/flutter-pipelines/commit/616c21364c0ce1b79c190cbadafbea6e706d94aa))
+
 ## [0.21.2](https://github.com/microservicer/flutter-pipelines/compare/v0.21.1...v0.21.2) (2023-08-12)
 
 
