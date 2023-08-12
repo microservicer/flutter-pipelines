@@ -5,6 +5,9 @@ on:
       - main
       - master
 
+concurrency:
+  group: ${{ github.workflow }}
+
 jobs:
   test-analyze:
     uses: ./.github/workflows/01-test-analyze.yml

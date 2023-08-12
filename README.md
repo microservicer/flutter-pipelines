@@ -8,11 +8,13 @@
     <img alt="semantic-release: angular" src="https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release">
   </a>
 </p>
+
 This repository contains the infrastructure code for deploying a Flutter mobile app to the Play Store and App Store.
 
 It is an opinionated setup that is focused on using a native Flutter approach to building and deploying the app.
 It is also focused on GitOps so that all changes are tracked within this repository.
-The only exception is the Fastlane Match certificates and profiles that are stored in a separate repository, depending on your setup.
+The only exception is the Fastlane Match certificates and profiles that are stored in a separate repository,
+depending on your setup.
 
 ## Overview
 The Flutter mobile app pipelines are a set of pipelines that are used to build and test the Flutter mobile app.
@@ -36,29 +38,30 @@ The following prerequisites are needed to install and run the pipelines:
 
 ## Pipelines
 
+## Installing as a new Flutter app
+
+The following steps are designed if you are going to use this project as boilerplate for a new Flutter app.
+If you are intrested in using this project as a template for an existing Flutter app, skip to the [next section](#copy-files-to-existing-project).
+
 ### Flutter
 Get the latest dependencies by running the following command in the root of your Flutter project:
 
 ```bash
 flutter pub get
 ```
+
 ### Renaming the package name
 To rename the package name of your Flutter app, run the following command in the root of your Flutter project:
 Change the `com.example.new_package_name` to the package name you want to use.
 Change the `My New App Name` to the name you want to use for your app.
-
-
-## Setup in existing app
-
-
-
 
 ```bash
 flutter pub global activate rename
 flutter pub global run rename --bundleId com.example.new_package_name
 flutter pub global run rename --appname "My New App Name"
 ```
-Make sure that all the files in the `android/app/src/main/kotlin/com/example/` directory are moved to the new package name directory and this is added to git.
+Make sure that all the files in the `android/app/src/main/kotlin/com/example/` 
+directory are moved to the new package name directory and this is added to git.
 
 ### Git Hooks
 We use Git hooks to enforce commit message formatting and automatically update our release notes.
@@ -249,6 +252,8 @@ Then run the following command in the `android` directory:
 ```bash
 bundle exec fastlane android internal
 ```
+
+## Copy files to existing project
 
 ## Common errors:
 

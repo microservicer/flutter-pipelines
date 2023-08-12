@@ -30,4 +30,4 @@ jobs:
           git config --global user.email "action@github.com"
           git add android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
           git commit -m "chore: Update screenshots android" -m  "[skip ci]"
-          git push
+          git pull && git push
