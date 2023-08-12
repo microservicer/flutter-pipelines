@@ -16,7 +16,10 @@ It is also focused on GitOps so that all changes are tracked within this reposit
 The only exception is the Fastlane Match certificates and profiles that are stored in a separate repository,
 depending on your setup.
 
+If you like this repository, please give it a star! :star:
+
 ## Overview
+
 The Flutter mobile app pipelines are a set of pipelines that are used to build and test the Flutter mobile app.
 The pipelines are defined in the `.github/workflows/`directory in the root of this repository.
 The pipelines are run on GitHub Actions.
@@ -38,10 +41,20 @@ The following prerequisites are needed to install and run the pipelines:
 
 ## Pipelines
 
+In the `.github/workflows` directory you will find the pipelines used. The entrypoint is the `00-main.yml` file.
+It is in this file that the other pipelines are called and the environment variables are set.
+For basic usage, you only need to edit the `00-main.yml` file.
+
+If you are using any other Match repository than Google Cloud. You will need to edit the `03a-build-ios.yml` file.
+
 ## Installing as a new Flutter app
 
 The following steps are designed if you are going to use this project as boilerplate for a new Flutter app.
-If you are intrested in using this project as a template for an existing Flutter app, skip to the [next section](#copy-files-to-existing-project).
+If you are interested in using this project as a template for an existing Flutter app, skip to the [next section](#copy-files-to-existing-project).
+
+### Fork the repository
+
+Fork this repository to your own GitHub account. Or download the repository as a zip file.
 
 ### Flutter
 Get the latest dependencies by running the following command in the root of your Flutter project:

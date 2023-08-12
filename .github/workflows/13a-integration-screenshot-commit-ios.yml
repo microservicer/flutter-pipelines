@@ -28,6 +28,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "action@github.com"
+          git config pull.rebase true 
           git add ios/fastlane/screenshots/${{ matrix.locale }}
           git commit -m "chore: Update screenshots iOS" -m  "[skip ci]"
           git pull && git push
