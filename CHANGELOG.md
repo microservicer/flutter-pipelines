@@ -1,3 +1,10 @@
+# [0.22.0](https://github.com/microservicer/flutter-pipelines/compare/v0.21.3...v0.22.0) (2023-08-14)
+
+
+### Features
+
+* Add main pipeline picture ([9ef7b7a](https://github.com/microservicer/flutter-pipelines/commit/9ef7b7a4a2cd9de4975087baf4d3e6b7f8e41ab8))
+
 ## [0.21.3](https://github.com/microservicer/flutter-pipelines/compare/v0.21.2...v0.21.3) (2023-08-12)
 
 
