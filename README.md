@@ -172,7 +172,7 @@ bundle exec fastlane match init
 After following the steps make sure to store the secret(s) in the GitHub repository secrets.
 
 If you have chosen to use Google Cloud Storage the secret is:
-- GC_KEYS - The key to the Google Cloud Storage bucket.
+- `GC_KEYS` - The key to the Google Cloud Storage bucket.
 
 To be accessed by the `03a-build-ios.yml` pipeline. Have you chosen another approach than Google Cloud Storage,
 you will need to edit the `03a-build-ios.yml` file.
