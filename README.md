@@ -24,7 +24,17 @@ The Flutter mobile app pipelines are a set of pipelines that are used to build a
 The pipelines are defined in the `.github/workflows/`directory in the root of this repository.
 The pipelines are run on GitHub Actions.
 
-[![Main pipline](./docs/images/main.png)](./docs/images/main.png)
+[![Main pipeline](./docs/images/main_full.png)](./docs/images/main_full.png)
+
+### Stages
+
+The pipeline can run in 3 different modes:
+* **test/analyze only** - only test and analyze the code, this happens on commits that are not deemed a new release
+by semantic-release.
+* **default** - build and test the app and upload changes to the Play Store and App Store.
+* **screenshots** - build and test the app and upload screenshots to the Play Store and App Store.
+this is triggered by a commit message containing a trigger word, default is "SCREENSHOT".
+eg. `git commit -m "feat: add new screen -m "" -m "[SCREENSHOT]"`
 
 ## Limitations
 
