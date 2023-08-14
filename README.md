@@ -26,21 +26,32 @@ The pipelines are run on GitHub Actions.
 
 [![Main pipeline](./docs/images/main_full.png)](./docs/images/main_full.png)
 
+### Pipelines
+
+In the `.github/workflows` directory you will find the pipelines used. The entrypoint is the `00-main.yml` file.
+It is in this file that the other pipelines are called and the environment variables are set.
+For basic usage, you only need to edit the `00-main.yml` file.
+
+If you are using any other Match repository than Google Cloud. You will need to edit the `03a-build-ios.yml` file.
+
 ### Stages
 
 The pipeline can run in 3 different modes:
 * **test/analyze only** - only test and analyze the code, this happens on commits that are not deemed a new release
 by semantic-release.
 * **default** - build and test the app and upload changes to the Play Store and App Store.
+this triggers on a new release by semantic-release.
 * **screenshots** - build and test the app and upload screenshots to the Play Store and App Store.
 this is triggered by a commit message containing a trigger word, default is "SCREENSHOT".
 eg. `git commit -m "feat: add new screen -m "" -m "[SCREENSHOT]"`
+The screenshot is an expensive operation and is therefore not run on every commit.
 
 ## Limitations
 
 - Builds can be flaky due to problems with running emulators.
 Tight timeouts has been added to the pipelines to reduce the risk of stuck jobs spending credits.
 - Only checks last commit for screenshot keyword
+- To be able to use the pipeline you have to build and upload the app bundle to the Play Store manually the first time.
 
 
 ## Prerequisites
@@ -52,23 +63,17 @@ The following prerequisites are needed to install and run the pipelines:
 - [A Google Play Store account](https://play.google.com/console/u/0/developers) (for android builds)
 - [An Apple Developer account](https://appstoreconnect.apple.com/) (for ios builds)
 
-
-## Pipelines
-
-In the `.github/workflows` directory you will find the pipelines used. The entrypoint is the `00-main.yml` file.
-It is in this file that the other pipelines are called and the environment variables are set.
-For basic usage, you only need to edit the `00-main.yml` file.
-
-If you are using any other Match repository than Google Cloud. You will need to edit the `03a-build-ios.yml` file.
-
-## Installing as a new Flutter app
+## Installing
 
 The following steps are designed if you are going to use this project as boilerplate for a new Flutter app.
-If you are interested in using this project as a template for an existing Flutter app, skip to the [next section](#copy-files-to-existing-project).
+If you are interested in using this project as a template for an existing Flutter app,
+you should be able to copy over the relevant files to your project and follow the appropriate steps below.
+For Android make sure you also configure your app/build.gradle file with the correct signing [configs](#setup-android-manually).
 
 ### Fork the repository
 
 Fork this repository to your own GitHub account. Or download the repository as a zip file.
+If you want to use it as a template for a new Flutter app, delete the .git folder and create a new repository.
 
 ### Clean up the repository
 
@@ -97,7 +102,7 @@ flutter pub global activate rename
 flutter pub global run rename --bundleId com.example.new_package_name
 flutter pub global run rename --appname "My New App Name"
 ```
-Make sure that all the files in the `android/app/src/main/kotlin/com/example/` 
+Make sure that all the files in the `android/app/src/main/kotlin/org/microservicer/bootstrap` 
 directory are moved to the new package name directory and this is added to git.
 
 ### Git Hooks
@@ -121,8 +126,8 @@ gem install bundler
 ```
 
 ## iOS
->  iOS builds are very expensive to run since they required a Mac to run on.
-these are billed with 10x the price of a normal build. 
+> iOS builds are very expensive to run since they required a Mac to run on.
+> these are billed with 10x the price of a normal build. 
 
 ### Setup iOS
 The following steps will help you run the iOS part of the pipeline.
@@ -241,24 +246,6 @@ Make sure you have the following:
 
 - `key.properties`  in your `android`  directory.
 - your upload key in the `android/app`  directory.
-To build the Android app locally, run the following command in the root of your Flutter project:
-
-```bash
-flutter build appbundle --release
-```
-[Google Play Console](https://play.google.com/apps/publish/). > Your app > Testing > Internal Testing and "Choose signing key"
-and select "Use Google-generated key".
-
-Then upload the app bundle to the Play Store.
-
-- Create release > Upload your app bundle. 
-- You can find the app bundle in the `build/app/outputs/bundle/release/app-release.aab`  directory.
-
-### Running Android build locally
-Make sure you have the following:
-
-- `key.properties`  in your `android`  directory. 
-- your upload key in the `android/app`  directory.
 - the API key stored in the `PLAY_STORE_CONFIG_JSON`  env or in a file called `key.json`  in the `android`  directory.
 - Export your flutter project path `bash export FLUTTER=$FLUTTER_PATH`  where `$FLUTTER_PATH`  is the path to your flutter installation.
 
@@ -269,9 +256,15 @@ bundle exec fastlane versioning
 bundle exec fastlane build
 ```
 
-## Copy files to existing project
+[Google Play Console](https://play.google.com/apps/publish/). > Your app > Testing > Internal Testing and "Choose signing key"
+and select "Use Google-generated key".
 
-### Setup Android Manually
+Then upload the app bundle to the Play Store.
+
+- Create release > Upload your app bundle. 
+- You can find the app bundle in the `build/app/outputs/bundle/release/app-release.aab`  directory.
+
+## Setup Android Manually
 The following steps will help you run the `03b-build-android.yml` pipeline if you only copied the files from this repository.
 
 You will need to replace the following classes in your build.gradle file:
