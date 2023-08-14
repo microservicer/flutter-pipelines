@@ -1,3 +1,10 @@
+## [0.22.1](https://github.com/microservicer/flutter-pipelines/compare/v0.22.0...v0.22.1) (2023-08-14)
+
+
+### Bug Fixes
+
+* Don't fail on no new screenshot ([b57a6ed](https://github.com/microservicer/flutter-pipelines/commit/b57a6ed7340fc27d6159a0f0bb2dcca1473fb940))
+
 # [0.22.0](https://github.com/microservicer/flutter-pipelines/compare/v0.21.3...v0.22.0) (2023-08-14)
 
 
