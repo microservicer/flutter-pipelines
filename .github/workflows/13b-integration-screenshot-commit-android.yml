@@ -6,7 +6,7 @@ on:
         required: true
         type: string
 jobs:
-  commit-screenhots:
+  commit-screenshots:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     strategy:
@@ -24,7 +24,14 @@ jobs:
           mkdir -p android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
           find ./screenshots -type f -path '*/android-*/*' -exec cp {} android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots \;
 
+      - name: Check for changes in android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots
+        id: git-diff
+        run: |
+          git diff --quiet -- 'android/fastlane/metadata/android/${{ matrix.locale }}/images/phoneScreenshots' || (echo "Changes exist in android screenshots" && echo changes=true >> $GITHUB_OUTPUT)
+        continue-on-error: true
+
       - name: Commit screenshots
+        if: steps.git-diff.outputs.changes == 'true'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "action@github.com"
