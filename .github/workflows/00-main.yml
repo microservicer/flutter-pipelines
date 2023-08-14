@@ -24,6 +24,7 @@ jobs:
       screenshot-text: "SCREENSHOT"
 
   build-ios:
+    # set if false to disable iOS branch of build
     if: ${{ needs.conventional-release.outputs.new_release_published == 'true' }}
     needs:
       - conventional-release
@@ -43,6 +44,7 @@ jobs:
     secrets: inherit
 
   build-android:
+    # set if false to disable android branch of build
     if: ${{ needs.conventional-release.outputs.new_release_published == 'true' }}
     needs:
       - conventional-release

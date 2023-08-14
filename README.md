@@ -32,6 +32,9 @@ In the `.github/workflows` directory you will find the pipelines used. The entry
 It is in this file that the other pipelines are called and the environment variables are set.
 For basic usage, you only need to edit the `00-main.yml` file.
 
+You can also set one branch (iOS or Android) to be built and deployed. in the `00-main.yml` file.
+If you only want to build for one platform.
+
 If you are using any other Match repository than Google Cloud. You will need to edit the `03a-build-ios.yml` file.
 
 ### Stages
@@ -52,6 +55,8 @@ The screenshot is an expensive operation and is therefore not run on every commi
 Tight timeouts has been added to the pipelines to reduce the risk of stuck jobs spending credits.
 - Only checks last commit for screenshot keyword
 - To be able to use the pipeline you have to build and upload the app bundle to the Play Store manually the first time.
+- This project only focuses on App builds since there are too many differences on how people want to deploy to web.
+If you are looking for an easy way with GitHub Actions to deploy to web, check out [Firebase](https://firebase.google.com/docs/hosting)
 
 
 ## Prerequisites
