@@ -6,8 +6,8 @@ ROOT_DIR="$(dirname "$(realpath "$0")")/.."
 # List of files and directories to delete
 declare -a paths_to_delete=(
     ".idea/"
-    "fastlane/metadata/android/en-US/"
-    "fastlane/Appfile"
+    "android/fastlane/metadata/android/en-US"
+    "android/fastlane/Appfile"
     "ios/fastlane/screenshots"
     "ios/fastlane/Appfile"
     "ios/fastlane/Deliverfile"
