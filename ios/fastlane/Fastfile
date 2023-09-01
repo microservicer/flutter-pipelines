@@ -17,6 +17,7 @@ default_platform(:ios)
 
 platform :ios do
 
+  # Change this to match your app's key and issuer
   before_all do |lane, options|
     app_store_connect_api_key(
       key_id: '4H27D3QLG2',

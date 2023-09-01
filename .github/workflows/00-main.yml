@@ -70,8 +70,8 @@ jobs:
       - build-ios
     uses: ./.github/workflows/12a-integration-screenshot-ios.yml
     with:
-      #model: ['iPhone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']
-      model: "['iPhone SE (3rd generation)']"
+      model: "['iPhone 13 Pro Max', 'iPhone 8', 'iPad Pro (12.9-inch) (5th generation)', 'iPad Pro (11-inch) (3rd generation)']"
+      #model: "['iPhone SE (3rd generation)']"
 
   integration-screenshot-android:
     if: ${{ needs.parse-screenshot.outputs.contains_screenshot == 'true' }}

@@ -149,6 +149,24 @@ Generate a new App Store API key for the iOS app and store it in the GitHub repo
 If you want to run locally you need to store the API key in a file called AuthKey.p8 in the `ios` directory.
 Remember to add the file to the `.gitignore` file.
 
+##### Fastfile
+
+Make sure that you have set your API key ids in the top of the `ios/fastlane/Fastfile` file.
+
+```ruby
+...
+# Change this to match your app's key and issuer
+before_all do |lane, options|
+app_store_connect_api_key(
+  key_id: '4H27D3QLG2',
+  issuer_id: 'ec2c19af-8deb-4579-be01-5d677995d709',
+  key_filepath: './AuthKey.p8'
+)
+setup_ci if ENV['CI']
+end
+...
+```
+
 #### Fastlane
 Make sure to update/create the `Appfile` file in the `ios/fastlane` directory.
 
@@ -304,6 +322,16 @@ android {
 
 - `"Failed to read key  from store "../android/app/upload-keystore.jks": Tag number over 30 is not supported"` 
   This means that you missed to upload the keystore to GitHub secrets. Remember to base64 encode it first!
+
+## Take screenshots locally
+
+To take screenshots locally you can run the following commands to build and run the driver:
+
+```bash
+flutter drive --driver=test_driver/screenshot_test.dart --target=integration_test/screenshot_test.dart
+```
+
+Make sure that you have a simulator running before you run the command.
 
 ## Resources
 - [Guide](https://keyholesoftware.com/2023/02/13/automating-flutter-deployments-part-2-screenshots/)  on how to set up screenshots for the App Store and Play Store
