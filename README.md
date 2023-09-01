@@ -75,11 +75,6 @@ If you are interested in using this project as a template for an existing Flutte
 you should be able to copy over the relevant files to your project and follow the appropriate steps below.
 For Android make sure you also configure your app/build.gradle file with the correct signing [configs](#setup-android-manually).
 
-### Fork the repository
-
-Fork this repository to your own GitHub account. Or download the repository as a zip file.
-If you want to use it as a template for a new Flutter app, delete the .git folder and create a new repository.
-
 ### Clean up the repository
 
 Run the following script to clean up the repository of files that need to be configured for your app:
