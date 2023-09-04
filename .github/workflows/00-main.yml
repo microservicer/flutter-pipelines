@@ -9,7 +9,19 @@ on:
 concurrency:
   group: ${{ github.workflow }}
 
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
 jobs:
+  token:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GH_TOKEN
+        if: env.GH_TOKEN == ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+
   test-analyze:
     uses: ./.github/workflows/01-test-analyze.yml
 
@@ -17,6 +29,7 @@ jobs:
     needs:
       - test-analyze
     uses: ./.github/workflows/02-conventional-release.yml
+    secrets: inherit
 
   parse-screenshot:
     uses: ./.github/workflows/11-parse-screenshot.yml
