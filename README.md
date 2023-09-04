@@ -1,4 +1,4 @@
-# Flutter Mobile App Pipelines Infrastructure
+# Flutter Mobile App Pipelines
 
 <p>
   <a href="https://github.com/microservicer/flutter-pipelines/actions/workflows/00-main.yml">
