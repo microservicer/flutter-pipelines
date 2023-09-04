@@ -1,8 +1,8 @@
 # Flutter Mobile App Pipelines Infrastructure
 
 <p>
-  <a href="https://github.com/microservicer/flutter-pipelines/actions?query=workflow%3Amain-workflow+branch%3Amain">
-    <img alt="Build states" src="https://github.com/semantic-release/semantic-release/workflows/Test/badge.svg">
+  <a href="https://github.com/microservicer/flutter-pipelines/actions/workflows/00-main.yml">
+    <img alt="Build states" src="https://github.com/microservicer/flutter-pipelines/actions/workflows/00-main.yml/badge.svg?branch=main">
   </a>
   <a href="https://github.com/semantic-release/semantic-release">
     <img alt="semantic-release: angular" src="https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release">
