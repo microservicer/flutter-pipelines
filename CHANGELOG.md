@@ -1,3 +1,10 @@
+# [0.23.0](https://github.com/microservicer/flutter-pipelines/compare/v0.22.1...v0.23.0) (2023-09-04)
+
+
+### Features
+
+* Add workflow dispatch on main ([7bc2dd9](https://github.com/microservicer/flutter-pipelines/commit/7bc2dd99ecd2a49d583e1f58379c3151688a86f0))
+
 ## [0.22.1](https://github.com/microservicer/flutter-pipelines/compare/v0.22.0...v0.22.1) (2023-08-14)
 
 
