@@ -1,3 +1,10 @@
+# [0.26.0](https://github.com/microservicer/flutter-pipelines/compare/v0.25.0...v0.26.0) (2023-09-06)
+
+
+### Features
+
+* Add keystore to shorebird build ([7c62b02](https://github.com/microservicer/flutter-pipelines/commit/7c62b025695d4b9b3ca483c05e6e9489232f739e))
+
 # [0.25.0](https://github.com/microservicer/flutter-pipelines/compare/v0.24.0...v0.25.0) (2023-09-06)
 
 
