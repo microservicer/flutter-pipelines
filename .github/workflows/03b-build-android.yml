@@ -104,6 +104,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     if: ${{ inputs.shorebird == 'true' }}
+    defaults:
+      run:
+        working-directory: android
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v3
