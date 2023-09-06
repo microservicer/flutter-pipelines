@@ -9,6 +9,9 @@ on:
         description: 'Run APK build'
         type: string
         required: true
+      shorebird:
+        type: string
+        required: true
   workflow_dispatch:
     inputs:
       screenshot:
@@ -96,3 +99,32 @@ jobs:
           path: build/app/outputs/bundle/release/app-release.aab
           if-no-files-found: error
           retention-days: 3
+
+  build-shorebird:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: ${{ inputs.shorebird == 'true' }}
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: Check for shorebird.yaml file
+        id: check-yaml
+        run: |
+          if [[ -f "./shorebird.yaml" ]]; then
+            echo "File exists"
+            echo "contains_yaml=true" >> $GITHUB_OUTPUT
+          else
+            echo "File does not exist"
+            echo "contains_yaml=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🐦 Setup Shorebird
+        if: steps.check-yaml.outputs.contains_yaml == 'true'
+        uses: shorebirdtech/setup-shorebird@v0
+
+      - name: 🚀 Shorebird Release
+        if: steps.check-yaml.outputs.contains_yaml == 'true'
+        run: shorebird release android
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}

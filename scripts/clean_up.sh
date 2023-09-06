@@ -13,6 +13,7 @@ declare -a paths_to_delete=(
     "ios/fastlane/Deliverfile"
     "ios/fastlane/Matchfile"
     "CHANGELOG.md"
+    "shorebird.yaml"
 )
 
 # Iterate over each item and delete if exists
