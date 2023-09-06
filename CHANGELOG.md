@@ -1,3 +1,10 @@
+# [0.24.0](https://github.com/microservicer/flutter-pipelines/compare/v0.23.0...v0.24.0) (2023-09-06)
+
+
+### Features
+
+* Uppdate the release version in pubspec.yaml ([4f752e2](https://github.com/microservicer/flutter-pipelines/commit/4f752e2e9f75928c7d1a6e0c3d2e5e9129dd8e5c))
+
 # [0.23.0](https://github.com/microservicer/flutter-pipelines/compare/v0.22.1...v0.23.0) (2023-09-04)
 
 
