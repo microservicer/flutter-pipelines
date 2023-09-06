@@ -58,6 +58,14 @@ Tight timeouts has been added to the pipelines to reduce the risk of stuck jobs 
 - This project only focuses on App builds since there are too many differences on how people want to deploy to web.
 If you are looking for an easy way with GitHub Actions to deploy to web, check out [Firebase](https://firebase.google.com/docs/hosting)
 
+### Branch protection rules
+
+If you have branch protection rules on your repository,
+you will need to add a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to the repository secrets.
+
+- GH_TOKEN - A GitHub access token with the `repo` scope.
+
+It is highly recommended that you use a machine account for generating the token.
 
 ## Prerequisites
 The following prerequisites are needed to install and run the pipelines:
