@@ -120,6 +120,7 @@ jobs:
           fi
 
       - name: Configure Keystore
+        if: steps.check-yaml.outputs.contains_yaml == 'true'
         run: |
           echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
           echo "storeFile=upload-keystore.jks" >> key.properties
@@ -133,6 +134,7 @@ jobs:
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
 
       - uses: actions/setup-java@v3
+        if: steps.check-yaml.outputs.contains_yaml == 'true'
         with:
           distribution: 'zulu'
           java-version: '17'
