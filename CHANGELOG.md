@@ -1,3 +1,10 @@
+# [0.25.0](https://github.com/microservicer/flutter-pipelines/compare/v0.24.0...v0.25.0) (2023-09-06)
+
+
+### Features
+
+* Add Shorebird android support ([#6](https://github.com/microservicer/flutter-pipelines/issues/6)) ([0965c4b](https://github.com/microservicer/flutter-pipelines/commit/0965c4bb3037c6092cde80dcc5eb0c73d678436d))
+
 # [0.24.0](https://github.com/microservicer/flutter-pipelines/compare/v0.23.0...v0.24.0) (2023-09-06)
 
 
