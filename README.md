@@ -26,6 +26,17 @@ The pipelines are run on GitHub Actions.
 
 [![Main pipeline](./docs/images/main_full.png)](./docs/images/main_full.png)
 
+### Features
+
+This are the features of the pipelines:
+* **test** - run unit and integration tests
+* **analyze** - run static code analysis
+* **semantic versioning** - Create/append CHANGELOG.md and create a new version tag
+* **build** - build the app for iOS and Android
+* **shorebird** - create a release for Android
+* **screenshots** - take screenshots of the app and upload them to the Play Store and App Store
+* **deliver** - deploy the app and metadata to the Play Store internal track and App Store TestFlight.
+
 ### Pipelines
 
 In the `.github/workflows` directory you will find the pipelines used. The entrypoint is the `00-main.yml` file.
@@ -294,7 +305,7 @@ Then upload the app bundle to the Play Store.
 
 ## Shorebird
 
-This repository support shorebird to create releases on Android.
+This repository support shorebird to create releases on Android so that you always can patch the latest version.
 
 To use shorebird you need to initialize it with the following command:
 
