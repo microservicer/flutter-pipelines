@@ -7,5 +7,3 @@ on:
 jobs:
   test-analyze:
     uses: ./.github/workflows/01-test-analyze.yml
-  lint-pr:
-    uses: ./.github/workflows/21-lint-pr.yml
