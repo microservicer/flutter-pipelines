@@ -63,7 +63,9 @@ If you are looking for an easy way with GitHub Actions to deploy to web, check o
 If you have branch protection rules on your repository,
 you will need to add a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to the repository secrets.
 
-- GH_TOKEN - A GitHub access token with the `repo` scope.
+You also need to give the account permission to bypass the branch protection rules.
+
+- GH_TOKEN - A GitHub access token with either the `public_repo` or `repo` and `write:org` scope.
 
 It is highly recommended that you use a machine account for generating the token.
 
