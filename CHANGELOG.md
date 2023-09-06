@@ -1,3 +1,10 @@
+## [0.26.1](https://github.com/microservicer/flutter-pipelines/compare/v0.26.0...v0.26.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* Add default working directory ([5174cc3](https://github.com/microservicer/flutter-pipelines/commit/5174cc3f5aa32249c2af13e93707b78b3e7ce099))
+
 # [0.26.0](https://github.com/microservicer/flutter-pipelines/compare/v0.25.0...v0.26.0) (2023-09-06)
 
 
