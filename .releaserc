@@ -7,6 +7,9 @@
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
         "@semantic-release/changelog",
+        ["@semantic-release/exec", {
+            "prepareCmd": "sed -i \"s/^version: .*/version: ${nextRelease.version}/g\" pubspec.yaml"
+        }],
         "@semantic-release/git",
         "@semantic-release/github"
     ]
