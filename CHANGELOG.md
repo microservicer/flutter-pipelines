@@ -1,3 +1,13 @@
+## [0.27.1](https://github.com/microservicer/flutter-pipelines/compare/v0.27.0...v0.27.1) (2023-09-07)
+
+
+### Bug Fixes
+
+* Revert changes to token ([8c59dbc](https://github.com/microservicer/flutter-pipelines/commit/8c59dbc648769a1e6df511f0f10e08a45d7a0e15))
+* Try setting github token if GH_TOKEN is null ([2295b07](https://github.com/microservicer/flutter-pipelines/commit/2295b077ad821256e84b56fe46f638a4f23df59b))
+* Typo in secrets ([33cd7f4](https://github.com/microservicer/flutter-pipelines/commit/33cd7f41164362e409ac06229ceb463659a20928))
+* Use checkout v3 ([eb9372b](https://github.com/microservicer/flutter-pipelines/commit/eb9372babab1a15f4325595c96e223606bfa4555))
+
 # [0.27.0](https://github.com/microservicer/flutter-pipelines/compare/v0.26.1...v0.27.0) (2023-09-07)
 
 
