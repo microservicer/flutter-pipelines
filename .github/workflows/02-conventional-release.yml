@@ -1,10 +1,10 @@
 name: conventional-release
 on:
  workflow_call:
-   secret:
+   secrets:
      GH_TOKEN:
        required: true
-       type: string
+
    outputs:
      new_release_published:
       description: 'If a new release was published'
