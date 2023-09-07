@@ -1,3 +1,10 @@
+# [0.27.0](https://github.com/microservicer/flutter-pipelines/compare/v0.26.1...v0.27.0) (2023-09-07)
+
+
+### Features
+
+* Change working directory ([3b1ca01](https://github.com/microservicer/flutter-pipelines/commit/3b1ca012e027f4f65f3e1a67ef7e26b563240cb1))
+
 ## [0.26.1](https://github.com/microservicer/flutter-pipelines/compare/v0.26.0...v0.26.1) (2023-09-06)
 
 
