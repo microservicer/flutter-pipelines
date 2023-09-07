@@ -104,9 +104,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     if: ${{ inputs.shorebird == 'true' }}
-    defaults:
-      run:
-        working-directory: android
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v3
@@ -135,6 +132,7 @@ jobs:
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+        working-directory: android
 
       - uses: actions/setup-java@v3
         if: steps.check-yaml.outputs.contains_yaml == 'true'
