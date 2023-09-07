@@ -29,8 +29,7 @@ jobs:
     needs:
       - test-analyze
     uses: ./.github/workflows/02-conventional-release.yml
-    secrets:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }} || ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit
 
   parse-screenshot:
     uses: ./.github/workflows/11-parse-screenshot.yml
