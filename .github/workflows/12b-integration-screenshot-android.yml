@@ -23,7 +23,7 @@ jobs:
         model: ${{ fromJson(inputs.model) }}
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2

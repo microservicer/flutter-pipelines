@@ -33,7 +33,7 @@ jobs:
       run:
           working-directory: android
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -106,7 +106,7 @@ jobs:
     if: ${{ inputs.shorebird == 'true' }}
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Check for shorebird.yaml file
         id: check-yaml
