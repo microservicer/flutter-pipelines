@@ -12,7 +12,9 @@ declare -a paths_to_delete=(
     "ios/fastlane/Appfile"
     "ios/fastlane/Deliverfile"
     "ios/fastlane/Matchfile"
+    "docs/images"
     "CHANGELOG.md"
+    "LICENSE"
     "shorebird.yaml"
 )
 
