@@ -1,3 +1,10 @@
+# [0.28.0](https://github.com/microservicer/flutter-pipelines/compare/v0.27.1...v0.28.0) (2023-09-27)
+
+
+### Features
+
+* Add metadata folder for iOS ([66f2298](https://github.com/microservicer/flutter-pipelines/commit/66f22988013b5bb2aeaed1c539cb94704f316dba))
+
 ## [0.27.1](https://github.com/microservicer/flutter-pipelines/compare/v0.27.0...v0.27.1) (2023-09-07)
 
 
