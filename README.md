@@ -26,9 +26,14 @@ The pipelines are run on GitHub Actions.
 
 [![Main pipeline](./docs/images/main_full.png)](./docs/images/main_full.png)
 
+### How to trigger builds
+
+The pipelines are triggered by the semantic-release git commits.
+Please refer to the [semantic-release documentation](https://github.com/semantic-release/semantic-release#commit-message-format) for the conventions of the commit messages.
+
 ### Features
 
-This are the features of the pipelines:
+These are the features of the pipelines:
 * **test** - run unit and integration tests
 * **analyze** - run static code analysis
 * **semantic versioning** - Create/append CHANGELOG.md and create a new version tag
