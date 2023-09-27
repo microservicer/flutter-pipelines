@@ -158,7 +158,8 @@ Create a new App Store app in the [App Store Connect website](https://appstoreco
 #### API Keys
 Generate a new App Store API key for the iOS app and store it in the GitHub repository secrets.
 
-- At the [App Store Connect website](https://appstoreconnect.apple.com/access/api) , go to `Users and Access`  and create a new API key.
+- At the [App Store Connect website](https://appstoreconnect.apple.com/access/api) and create a new API key.
+- take a note of the Issuer ID and the Key ID. For later use.
 - Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
 - name: `APP_STORE_CONNECT_API_KEY` 
 
@@ -242,8 +243,9 @@ Create a new app in the [Google Play Console](https://play.google.com/apps/publi
 
 ### API Keys
 Create an API key for the Google Play Store.
+You can use [this manual](https://docs.fastlane.tools/actions/upload_to_play_store/)
 
-- At the [Google Play Console](https://play.google.com/apps/publish/)  go to `Setup`  and `API access`  and create a new API key.
+- Follow the steps in [this manual](https://docs.fastlane.tools/actions/upload_to_play_store/) to create a json key
 - Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
 - name: `PLAY_STORE_CONFIG_JSON` 
 
