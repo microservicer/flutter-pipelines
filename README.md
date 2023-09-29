@@ -227,6 +227,20 @@ Make sure that you have itc_team_id and team_id in the `Appfile` file in the `io
 
 Then open Xcode and go to `target` > `Signing & Capabilities` and make sure that the Match certificates and profiles are selected.
 
+##### Push certificates
+
+If you need to enable push you should create a new push certificate using the pem command:
+
+```bash
+bundle exec fastlane pem
+```
+
+Then run the register lane:
+
+```bash
+bundle exec fastlane register
+```
+
 ### Running iOS build locally
 
 To run the iOS build locally you need to have a Mac with Xcode installed.
