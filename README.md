@@ -125,8 +125,8 @@ Change the `My New App Name` to the name you want to use for your app.
 
 ```bash
 flutter pub global activate rename
-flutter pub global run rename --bundleId com.example.new_package_name
-flutter pub global run rename --appname "My New App Name"
+flutter pub global run rename setBundleId -v com.example.new_package_name
+flutter pub global run rename setAppName -v "My New App Name"
 ```
 Make sure that all the files in the `android/app/src/main/kotlin/org/microservicer/bootstrap` 
 directory are moved to the new package name directory and this is added to git.
