@@ -376,6 +376,9 @@ android {
 - `"Failed to read key  from store "../android/app/upload-keystore.jks": Tag number over 30 is not supported"` 
   This means that you missed to upload the keystore to GitHub secrets. Remember to base64 encode it first!
 
+- `"This job failed"` on the `02-conventional-release.yml` job.
+  This means that you missed creating a `GH_TOKEN` secret in the repository secrets.
+
 ## Take screenshots locally
 
 To take screenshots locally you can run the following commands to build and run the driver:
