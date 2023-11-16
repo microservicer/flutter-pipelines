@@ -289,13 +289,16 @@ Generate a new upload key for the Android app and store it in the GitHub reposit
         - `keyPassword` 
         - `keyAlias` 
         - `storeFile` 
+- Base64 encode the `android/app/upload-keystore.jks`  file.
+    - `base64 android/app/upload-keystore.jks`
 - Then upload it to the GitHub repository secrets. Repository Settings > Secrets and variables > Actions > New repository secret.
 - name: `PLAY_STORE_UPLOAD_KEY` 
 - Add each of the other line from the `key.properties`  as separate secrets:
     - `KEYSTORE_KEY_ALIAS` 
     - `KEYSTORE_KEY_PASSWORD` 
     - `KEYSTORE_STORE_PASSWORD` 
-Make sure to add `key.properties` and the generated key to the `.gitignore` file.
+
+> Make sure the `key.properties` and the generated key is in the `.gitignore` file.
 
 ### Build Android locally
 To be able to use the pipeline you have to build and upload the app bundle to the Play Store manually the first time.
