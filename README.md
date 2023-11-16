@@ -301,16 +301,27 @@ Generate a new upload key for the Android app and store it in the GitHub reposit
 > Make sure the `key.properties` and the generated key is in the `.gitignore` file.
 
 ### Build Android locally
+
+#### First time
 To be able to use the pipeline you have to build and upload the app bundle to the Play Store manually the first time.
 
+You need to build the app bundle manually the first time with the following command:
+```bash
+flutter build appbundle
+```
 This is because the pipeline is dependent on the app bundle name that can only be set when uploading the app bundle to the Play Store.
 
+##### Generate signing key
+[Google Play Console](https://play.google.com/apps/publish/). > Your app > Testing > Internal Testing and "Choose signing key"
+and select "Use Google-generated key".
+
+#### After first time
 Make sure you have the following:
 
 - `key.properties`  in your `android`  directory.
 - your upload key in the `android/app`  directory.
 - the API key stored in the `PLAY_STORE_CONFIG_JSON`  env or in a file called `key.json`  in the `android`  directory.
-- Export your flutter project path `bash export FLUTTER=$FLUTTER_PATH`  where `$FLUTTER_PATH`  is the path to your flutter installation.
+- Export your flutter project path `export FLUTTER=$FLUTTER_PATH`  where `$FLUTTER_PATH`  is the path to your flutter installation.
 
 Then run the following command in the `android` directory:
 
@@ -319,8 +330,7 @@ bundle exec fastlane versioning
 bundle exec fastlane build
 ```
 
-[Google Play Console](https://play.google.com/apps/publish/). > Your app > Testing > Internal Testing and "Choose signing key"
-and select "Use Google-generated key".
+#### Upload manually
 
 Then upload the app bundle to the Play Store.
 
