@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download app
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: app-simulator-build
           path: build/ios/iphonesimulator/Runner.app
