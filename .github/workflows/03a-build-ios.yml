@@ -61,7 +61,7 @@ jobs:
 
       - name: Archive integration ipa
         if: ${{ inputs.screenshot == 'true' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-simulator-build
           path: build/ios/iphonesimulator/Runner.app
@@ -77,7 +77,7 @@ jobs:
 
       - name: Archive ipa
         if: ${{ inputs.ipa == 'true' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Runner.ipa
           path: ios/Runner.ipa

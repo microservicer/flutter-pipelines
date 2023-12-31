@@ -79,7 +79,7 @@ jobs:
 
       - name: Archive integration test apk
         if: ${{ inputs.screenshot == 'true' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-debug.apk
           path: build/app/outputs/flutter-apk/app-debug.apk
@@ -93,7 +93,7 @@ jobs:
 
       - name: Archive appbundle
         if: ${{ inputs.apk == 'true' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-release.aab
           path: build/app/outputs/bundle/release/app-release.aab
