@@ -1,3 +1,10 @@
+# [0.29.0](https://github.com/microservicer/flutter-pipelines/compare/v0.28.0...v0.29.0) (2024-04-03)
+
+
+### Features
+
+* Add pre-commit hook with flutter lint ([1991595](https://github.com/microservicer/flutter-pipelines/commit/199159534be0532921ab0afcb14f865aee09db04))
+
 # [0.28.0](https://github.com/microservicer/flutter-pipelines/compare/v0.27.1...v0.28.0) (2023-09-27)
 
 
