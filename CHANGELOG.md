@@ -1,3 +1,15 @@
+# [0.30.0](https://github.com/microservicer/flutter-pipelines/compare/v0.29.0...v0.30.0) (2024-04-03)
+
+
+### Bug Fixes
+
+* Build version for iOS ([cc47012](https://github.com/microservicer/flutter-pipelines/commit/cc4701285bf1d13e1072b5630f197f9f0fc66a54))
+
+
+### Features
+
+* Remove Shorebird ([d154f5a](https://github.com/microservicer/flutter-pipelines/commit/d154f5adff5ee1dbbe72715401498eafee960877))
+
 # [0.29.0](https://github.com/microservicer/flutter-pipelines/compare/v0.28.0...v0.29.0) (2024-04-03)
 
 
