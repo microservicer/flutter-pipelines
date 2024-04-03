@@ -38,7 +38,6 @@ These are the features of the pipelines:
 * **analyze** - run static code analysis
 * **semantic versioning** - Create/append CHANGELOG.md and create a new version tag
 * **build** - build the app for iOS and Android
-* **shorebird** - create a release for Android
 * **screenshots** - take screenshots of the app and upload them to the Play Store and App Store
 * **deliver** - deploy the app and metadata to the Play Store internal track and App Store TestFlight.
 
@@ -337,22 +336,6 @@ Then upload the app bundle to the Play Store.
 
 - Create release > Upload your app bundle. 
 - You can find the app bundle in the `build/app/outputs/bundle/release/app-release.aab`  directory.
-
-## Shorebird
-
-This repository support shorebird to create releases on Android so that you always can patch the latest version.
-
-To use shorebird you need to initialize it with the following command:
-
-```bash
-shorebird init
-```
-
-Then follow the [shorebird guide](https://docs.shorebird.dev/ci/github#authentication) to create a secret in the repository.
-
-The pipeline will the shorebird deploy automatically if the flag in main is set to true (default) and there is a shorebird.yaml present.
-
-Only supports android since iOS is still in alpha.
 
 ## Setup Android Manually
 The following steps will help you run the `03b-build-android.yml` pipeline if you only copied the files from this repository.

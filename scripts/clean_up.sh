@@ -15,7 +15,6 @@ declare -a paths_to_delete=(
     "docs/images"
     "CHANGELOG.md"
     "LICENSE"
-    "shorebird.yaml"
 )
 
 # Iterate over each item and delete if exists

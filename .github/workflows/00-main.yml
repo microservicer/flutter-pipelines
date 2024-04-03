@@ -67,7 +67,6 @@ jobs:
     with:
       screenshot: ${{ needs.parse-screenshot.outputs.contains_screenshot }}
       apk: "true"
-      shorebird: "true"
     secrets: inherit
 
   upload-android:
