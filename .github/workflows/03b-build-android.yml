@@ -142,7 +142,7 @@ jobs:
 
       - name: 🐦 Setup Shorebird
         if: steps.check-yaml.outputs.contains_yaml == 'true'
-        uses: shorebirdtech/setup-shorebird@v0
+        uses: shorebirdtech/setup-shorebird@v1
 
       - name: 🚀 Shorebird Release
         if: steps.check-yaml.outputs.contains_yaml == 'true'
