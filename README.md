@@ -133,6 +133,7 @@ directory are moved to the new package name directory and this is added to git.
 
 ### Git Hooks
 You can use Git hooks to enforce commit message formatting to reduce the number of failed builds.
+The hooks also make sure that the Flutter project is formatted correctly according to linting rules.
 To install these hooks, run the following command after you clone the repository:
 
 ```bash

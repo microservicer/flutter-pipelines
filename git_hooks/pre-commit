@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Moving to the Flutter project root..."
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+cd "$PROJECT_ROOT"
+
+echo "Running Flutter analyze to check for linting issues..."
+RESULT=$(flutter analyze)
+
+if ! echo "$RESULT" | grep -q "No issues found!"; then
+    echo "Flutter analyze found issues. Please resolve them before committing:"
+    echo "$RESULT"
+    exit 1
+fi
+
+echo "No Flutter linting issues found. Proceeding with commit..."
+exit 0
