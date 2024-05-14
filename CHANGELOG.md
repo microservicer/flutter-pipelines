@@ -1,3 +1,10 @@
+## [0.30.1](https://github.com/microservicer/flutter-pipelines/compare/v0.30.0...v0.30.1) (2024-05-14)
+
+
+### Bug Fixes
+
+* Update iOS certs ([dd06f48](https://github.com/microservicer/flutter-pipelines/commit/dd06f485db9d9aeef7ca2d00d992a7b0af87e201))
+
 # [0.30.0](https://github.com/microservicer/flutter-pipelines/compare/v0.29.0...v0.30.0) (2024-04-03)
 
 
