@@ -1,3 +1,10 @@
+## [0.30.3](https://github.com/microservicer/flutter-pipelines/compare/v0.30.2...v0.30.3) (2024-05-16)
+
+
+### Bug Fixes
+
+* Update gem and Matchfiles ([da25625](https://github.com/microservicer/flutter-pipelines/commit/da25625ac75be6e88b9d70ded340108e5d6e5e1b))
+
 ## [0.30.2](https://github.com/microservicer/flutter-pipelines/compare/v0.30.1...v0.30.2) (2024-05-16)
 
 
