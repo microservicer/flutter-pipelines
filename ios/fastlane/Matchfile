@@ -1,4 +1,4 @@
-google_cloud_bucket_name("microservicer-flutter-pipelines")
+google_cloud_bucket_name("microservicer-fastlane-cert")
 
 storage_mode("google_cloud")
 
