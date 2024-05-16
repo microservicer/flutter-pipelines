@@ -1,3 +1,10 @@
+## [0.30.2](https://github.com/microservicer/flutter-pipelines/compare/v0.30.1...v0.30.2) (2024-05-16)
+
+
+### Bug Fixes
+
+* Not running appstore config in register ([7d958e1](https://github.com/microservicer/flutter-pipelines/commit/7d958e16dde13420e80ee5517c863bdfcf1b3289))
+
 ## [0.30.1](https://github.com/microservicer/flutter-pipelines/compare/v0.30.0...v0.30.1) (2024-05-14)
 
 
