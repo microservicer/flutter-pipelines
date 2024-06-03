@@ -21,10 +21,10 @@ packages:
     dependency: "direct dev"
     description:
       name: change_app_package_name
-      sha256: f9ebaf68a4b5a68c581492579bb68273c523ef325fbf9ce2f1b57fb136ad023b
+      sha256: "494e7943d4e8ba6a70970bf0fac293c866a121c50096dc9e027565bfbfc5c7a1"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   characters:
     dependency: transitive
     description:
