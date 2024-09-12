@@ -46,10 +46,18 @@ platform :ios do
   end
 
   lane :upload_testflight do
+    release_notes = ENV['RELEASE_NOTES']
     upload_to_testflight(
-        ipa: 'Runner.ipa',
-        skip_waiting_for_build_processing: true,
-    )
+      ipa: 'Runner.ipa',
+      ## You can set this to true and remove the changelog if you want to save build processing time but not have change notes.
+      skip_waiting_for_build_processing: false,
+      #      distribute_external: true,
+      # groups: ['external_testers],
+      reject_build_waiting_for_review: true,
+      wait_processing_interval: 15,
+      # notify_external_testers: true,
+      changelog: release_notes,
+      )
   end
 
   lane :upload_metadata_app_store do

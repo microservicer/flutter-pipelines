@@ -1,14 +1,20 @@
 name: conventional-release
 on:
- workflow_call:
-   secrets:
-     GH_TOKEN:
-       required: true
+  workflow_call:
+    secrets:
+      GH_TOKEN:
+        required: true
 
-   outputs:
-     new_release_published:
-      description: 'If a new release was published'
-      value: ${{ jobs.conventional-release.outputs.new_release_published }}
+    outputs:
+      new_release_published:
+        description: 'If a new release was published'
+        value: ${{ jobs.conventional-release.outputs.new_release_published }}
+      new_release_version:
+        description: 'The new release version'
+        value: ${{ jobs.conventional-release.outputs.new_release_version }}
+      new_release_notes:
+        description: 'The release notes for the new release'
+        value: ${{ jobs.conventional-release.outputs.new_release_notes }}
 
 jobs:
   conventional-release:
@@ -31,9 +37,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Set output
-        id: output
-        run: echo new_release_published=${{ steps.semantic.outputs.new_release_published }} >> $GITHUB_OUTPUT
-
     outputs:
-        new_release_published: ${{ steps.output.outputs.new_release_published }}
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
+      new_release_notes: ${{ steps.semantic.outputs.new_release_notes }}

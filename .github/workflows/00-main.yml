@@ -54,7 +54,11 @@ jobs:
     needs:
       - parse-screenshot
       - build-ios
+      - conventional-release
     uses: ./.github/workflows/21a-upload-release-ios.yml
+    with:
+      new_release: ${{ needs.conventional-release.outputs.new_release }}
+      new_release_notes: ${{ needs.conventional-release.outputs.new_release_notes }}
     secrets: inherit
 
   build-android:
@@ -74,7 +78,11 @@ jobs:
     needs:
       - parse-screenshot
       - build-android
+      - conventional-release
     uses: ./.github/workflows/21b-upload-release-android.yml
+    with:
+      new_release: ${{ needs.conventional-release.outputs.new_release }}
+      new_release_notes: ${{ needs.conventional-release.outputs.new_release_notes }}
     secrets: inherit
 
   integration-screenshot-ios:
@@ -118,11 +126,19 @@ jobs:
   upload-ios-screenhot:
     needs:
       - integration-screenshot-commit-ios
+      - conventional-release
     uses: ./.github/workflows/21a-upload-release-ios.yml
+    with:
+      new_release: ${{ needs.conventional-release.outputs.new_release }}
+      new_release_notes: ${{ needs.conventional-release.outputs.new_release_notes }}
     secrets: inherit
 
   upload-android-screenhot:
     needs:
       - integration-screenshot-commit-android
+      - conventional-release
     uses: ./.github/workflows/21b-upload-release-android.yml
+    with:
+      new_release: ${{ needs.conventional-release.outputs.new_release }}
+      new_release_notes: ${{ needs.conventional-release.outputs.new_release_notes }}
     secrets: inherit

@@ -1,6 +1,15 @@
-name: build-release-android
+name: upload-release-android
 on:
   workflow_call:
+    inputs:
+      new_release:
+        required: true
+        type: string
+        description: "The new release version number"
+      new_release_notes:
+        required: true
+        type: string
+        description: "The release notes for the new release"
 
 jobs:
   build:
@@ -28,6 +37,12 @@ jobs:
           bundler-cache: true
           working-directory: android
       - run: bundle install
+
+      - run: bundle exec fastlane versioning
+        env:
+          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
+
+      - run: echo "${{ inputs.new_release_notes }}" > ./fastlane/metadata/android/en-GB/changelogs/${{ env.ANDROID_VERSION_CODE }}.txt
 
       - run: bundle exec fastlane internal
         env:

@@ -51,14 +51,27 @@ platform :android do
         # If so, delete it from the Google Play Console or manually increment the version code to a latter value
         upload_to_play_store(
             skip_upload_apk: true,
-            skip_upload_changelogs: true,
             track: "internal",
             aab: "../build/app/outputs/bundle/release/app-release.aab",
             json_key_data: json_key,
             # Change to "completed" once your app is ready to publish
             release_status: "draft",
             timeout: 600,
+            sync_image_upload: true,
         )
+
+        ## Uncomment the following line to promote the internal track to alpha
+        #        upload_to_play_store(
+        #  track: "internal",
+        #  track_promote_to: "alpha",
+        #  json_key_data: json_key,
+        #  skip_upload_apk: true,
+        #  skip_upload_aab: true,
+        #  skip_upload_metadata: true,
+        #  skip_upload_changelogs: true,
+        #  skip_upload_images: true,
+        #  skip_upload_screenshots: true
+        # )
     end
 
     lane :build do

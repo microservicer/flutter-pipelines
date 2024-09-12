@@ -5,13 +5,16 @@
     ],
     "plugins": [
         "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
+        ["@semantic-release/changelog", {
+            "linkReferences": "false",
+            "linkCompare": "false"
+        }],
         "@semantic-release/changelog",
         ["@semantic-release/exec", {
-            "prepareCmd": "sed -i \"s/^version: .*/version: ${nextRelease.version}/g\" pubspec.yaml"
+            "prepareCmd": "FOLDER_PATH=android/fastlane/metadata/android/en-GB/changelogs && mkdir -p $FOLDER_PATH && echo \"${nextRelease.notes}\" > $FOLDER_PATH/${nextRelease.version}.txt && git add $FOLDER_PATH/${nextRelease.version}.txt && sed -i \"s/^version: .*/version: ${nextRelease.version}/g\" pubspec.yaml"
         }],
         ["@semantic-release/git", {
-            "assets": ["CHANGELOG.md", "pubspec.yaml"],
+            "assets": ["CHANGELOG.md", "pubspec.yaml", "android/fastlane/metadata/android/en-US/changelogs/${nextRelease.version}/default.txt"],
             "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
         }],
         "@semantic-release/github"
