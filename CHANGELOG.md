@@ -1,3 +1,17 @@
+## [0.31.1](https://github.com/microservicer/flutter-pipelines/compare/v0.31.0...v0.31.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* Missing release notes generator ([e6ab135](https://github.com/microservicer/flutter-pipelines/commit/e6ab135a83bef4261e231200d622bc8831945c5e))
+
+## [0.31.1](https://github.com/microservicer/flutter-pipelines/compare/v0.31.0...v0.31.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* Missing release notes generator ([e6ab135](https://github.com/microservicer/flutter-pipelines/commit/e6ab135a83bef4261e231200d622bc8831945c5e))
+
 ## [0.30.3](https://github.com/microservicer/flutter-pipelines/compare/v0.30.2...v0.30.3) (2024-05-16)
 
 
