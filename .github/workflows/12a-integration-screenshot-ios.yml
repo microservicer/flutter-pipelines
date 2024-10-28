@@ -30,7 +30,7 @@ jobs:
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - uses: futureware-tech/simulator-action@v3
+      - uses: futureware-tech/simulator-action@v4
         with:
           model: ${{ matrix.model }}
       - run: >-
